@@ -16,3 +16,18 @@ export async function getWeatherByCity(city) {
 
   return response.data;
 }
+
+export async function getWeatherByCoords(lat, lon) {
+  const response = await axios.get(BASE_URL, {
+    params: {
+      latitude: lat,
+      longitude: lon,
+      current:
+        "temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code",
+      daily: "temperature_2m_max,temperature_2m_min,weather_code",
+      timezone: "auto",
+    },
+  });
+
+  return response.data;
+}

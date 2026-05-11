@@ -295,6 +295,31 @@ h1 {
   background: #2563eb;
 }
 
+.location-button {
+  display: block;
+  margin: -12px auto 24px;
+  border: none;
+  background: #16a34a;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.location-button:hover {
+  background: #15803d;
+}
+
+.app.dark .location-button {
+  background: #22c55e;
+  color: #052e16;
+}
+
+.app.dark .location-button:hover {
+  background: #16a34a;
+}
+
 @media (max-width: 768px) {
   .forecast-list {
     grid-template-columns: repeat(2, 1fr);

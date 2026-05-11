@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-
+import { getWeatherByCity, getWeatherByCoords } from "./api/weatherApi";
 import { iranCities } from "./data/iranCities";
-import { getWeatherByCity } from "./api/weatherApi";
 import CitySelector from "./components/CitySelector";
 import WeatherCard from "./components/WeatherCard";
 import ForecastList from "./components/ForecastList";
@@ -14,6 +13,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [locationName, setLocationName] = useState("");
 
   function updateRecentCities(city) {
     const updatedCities = [
@@ -25,9 +25,40 @@ function App() {
     localStorage.setItem("recentCities", JSON.stringify(updatedCities));
   }
 
+  function handleUseMyLocation() {
+  if (!navigator.geolocation) {
+    setError("Geolocation is not supported by your browser.");
+    return;
+  }
+
+  setLoading(true);
+  setError("");
+
+  navigator.geolocation.getCurrentPosition(
+    async (position) => {
+      try {
+        const { latitude, longitude } = position.coords;
+
+        const data = await getWeatherByCoords(latitude, longitude);
+        setWeather(data);
+        setLocationName("Your Location");
+      } catch (err) {
+        setError("Could not fetch weather for your location.");
+      } finally {
+        setLoading(false);
+      }
+    },
+    () => {
+      setError("Location permission denied.");
+      setLoading(false);
+    }
+  );
+  }
+
   function handleCityChange(city) {
-    setSelectedCity(city);
-    updateRecentCities(city);
+  setLocationName("");
+  setSelectedCity(city);
+  updateRecentCities(city);
   }
 
   function toggleTheme() {
@@ -91,6 +122,10 @@ function App() {
         {isDarkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
         </button>
 
+        <button className="location-button" onClick={handleUseMyLocation}>
+        📍 Use My Location
+        </button>
+
         <CitySelector
           cities={iranCities}
           selectedCity={selectedCity}
@@ -120,7 +155,10 @@ function App() {
 
         {weather && !loading && (
           <>
-            <WeatherCard city={selectedCity} weather={weather} />
+            <WeatherCard
+            city={locationName ? { name: locationName, faName: "" } : selectedCity}
+            weather={weather}
+            />
             <ForecastList weather={weather} />
           </>
         )}
