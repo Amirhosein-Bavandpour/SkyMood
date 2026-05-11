@@ -1,9 +1,18 @@
 import { Droplets, Wind } from "lucide-react";
 import { getWeatherInfo } from "../utils/weatherCodes";
 
-function WeatherCard({ city, weather }) {
+function convertTemp(temp, unit) {
+  if (unit === "fahrenheit") {
+    return Math.round((temp * 9) / 5 + 32);
+  }
+
+  return Math.round(temp);
+}
+
+function WeatherCard({ city, weather, unit }) {
   const current = weather.current;
   const info = getWeatherInfo(current.weather_code);
+  const unitSymbol = unit === "fahrenheit" ? "°F" : "°C";
 
   return (
     <div className="weather-card">
@@ -12,28 +21,33 @@ function WeatherCard({ city, weather }) {
 
       <div className="weather-icon">{info.icon}</div>
 
-      <h1>{Math.round(current.temperature_2m)}°C</h1>
+      <h1>
+        {convertTemp(current.temperature_2m, unit)}
+        {unitSymbol}
+      </h1>
+
       <p>{info.label}</p>
 
       <div className="weather-details">
-       <span>
-       🌡️ Feels like {Math.round(current.apparent_temperature)}°C
-       </span>
+        <span>
+          🌡️ Feels like {convertTemp(current.apparent_temperature, unit)}
+          {unitSymbol}
+        </span>
 
-       <span>
-       <Droplets size={18} />
-       {current.relative_humidity_2m}%
-       </span>
+        <span>
+          <Droplets size={18} />
+          {current.relative_humidity_2m}%
+        </span>
 
-       <span>
-       <Wind size={18} />
-       {current.wind_speed_10m} km/h
-       </span>
+        <span>
+          <Wind size={18} />
+          {current.wind_speed_10m} km/h
+        </span>
       </div>
 
       <div className="sun-times">
-       <span>🌅 Sunrise: {weather.daily.sunrise[0].slice(11, 16)}</span>
-       <span>🌇 Sunset: {weather.daily.sunset[0].slice(11, 16)}</span>
+        <span>🌅 Sunrise: {weather.daily.sunrise[0].slice(11, 16)}</span>
+        <span>🌇 Sunset: {weather.daily.sunset[0].slice(11, 16)}</span>
       </div>
     </div>
   );

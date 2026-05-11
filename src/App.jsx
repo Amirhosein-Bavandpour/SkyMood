@@ -15,6 +15,7 @@ function App() {
   const [error, setError] = useState("");
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [locationName, setLocationName] = useState("");
+  const [unit, setUnit] = useState("celsius");
 
   function updateRecentCities(city) {
     const updatedCities = [
@@ -54,6 +55,10 @@ function App() {
       setLoading(false);
     }
   );
+  }
+
+  function toggleUnit() {
+  setUnit((prev) => (prev === "celsius" ? "fahrenheit" : "celsius"));
   }
 
   function handleCityChange(city) {
@@ -127,6 +132,10 @@ function App() {
         📍 Use My Location
         </button>
 
+        <button className="unit-toggle" onClick={toggleUnit}>
+        {unit === "celsius" ? "°F Fahrenheit" : "°C Celsius"}
+        </button>
+
         <CitySelector
           cities={iranCities}
           selectedCity={selectedCity}
@@ -159,8 +168,9 @@ function App() {
             <WeatherCard
             city={locationName ? { name: locationName, faName: "" } : selectedCity}
             weather={weather}
+            unit={unit}
             />
-            <ForecastList weather={weather} />
+            <ForecastList weather={weather} unit={unit} />
           </>
         )}
         

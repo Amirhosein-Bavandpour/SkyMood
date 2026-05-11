@@ -415,6 +415,27 @@ h1 {
   background: #1e293b;
 }
 
+.unit-toggle {
+  display: block;
+  margin: -12px auto 24px;
+  border: none;
+  background: #7c3aed;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.unit-toggle:hover {
+  background: #6d28d9;
+}
+
+.app.dark .unit-toggle {
+  background: #a78bfa;
+  color: #2e1065;
+}
+
 @media (max-width: 768px) {
   .forecast-list {
     grid-template-columns: repeat(2, 1fr);
