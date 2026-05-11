@@ -138,19 +138,19 @@ function App() {
       <section className="container">
         <h1>Iran Weather Dashboard</h1>
         <p className="subtitle">Live weather forecast for Iranian cities</p>
+        <div class="button-group">
+          <button className="theme-toggle" onClick={toggleTheme}>
+            {isDarkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
+          </button>
 
-        <button className="theme-toggle" onClick={toggleTheme}>
-          {isDarkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
-        </button>
+          <button className="location-button" onClick={handleUseMyLocation}>
+            📍 Use My Location
+          </button>
 
-        <button className="location-button" onClick={handleUseMyLocation}>
-          📍 Use My Location
-        </button>
-
-        <button className="unit-toggle" onClick={toggleUnit}>
-          {unit === "celsius" ? "°F Fahrenheit" : "°C Celsius"}
-        </button>
-
+          <button className="unit-toggle" onClick={toggleUnit}>
+            {unit === "celsius" ? "°F Fahrenheit" : "°C Celsius"}
+          </button>
+        </div>
         <CitySelector
           cities={iranCities}
           selectedCity={selectedCity}

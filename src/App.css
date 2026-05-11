@@ -69,6 +69,12 @@ h1 {
   color: #64748b;
   margin-bottom: 32px;
 }
+.city-selector {
+  padding: auto;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
 
 .city-selector input,
 .city-selector select {
@@ -87,7 +93,9 @@ h1 {
 }
 
 .city-selector label {
-  padding: 5px;
+  margin-bottom: auto;
+  margin-top: auto;
+  padding: 10px;
 }
 
 .empty-message {
@@ -216,9 +224,17 @@ h1 {
   background: #bae6fd;
 }
 
+.button-group {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
 .theme-toggle {
-  display: block;
-  margin: 0 auto 24px;
   border: none;
   background: #0f172a;
   color: white;
@@ -296,8 +312,6 @@ h1 {
 }
 
 .location-button {
-  display: block;
-  margin: -12px auto 24px;
   border: none;
   background: #16a34a;
   color: white;
@@ -416,8 +430,6 @@ h1 {
 }
 
 .unit-toggle {
-  display: block;
-  margin: -12px auto 24px;
   border: none;
   background: #7c3aed;
   color: white;
@@ -446,25 +458,47 @@ h1 {
 }
 
 .air-quality-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
+  justify-content: center;
 }
 
 .air-quality-grid span {
-  background: #f8fafc;
-  padding: 6px;
+  background: #f4f8fb;
+  padding: 15px;
   border-radius: 16px;
-  font-weight: 600;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  margin-top:16px;
+  gap: 10px;
+  margin-top:5px;
 }
 
 .app.dark .air-quality-grid span {
   background: #1e293b;
+}
+
+.aqi-status {
+  margin-bottom: 12px;
+  background: #f3f4f9;
+  color: #000000;
+  border-radius: 18px;
+  padding: 14px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.app.dark .aqi-status {
+  background: #18243a;
+  color: #ffffff;
+}
+
+.air-quality-grid {
+  grid-template-columns: repeat(3, 1fr);
 }
 
 @media (max-width: 768px) {
@@ -473,10 +507,11 @@ h1 {
   }
 
   .air-quality-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
   }
 
   .weather-card h1 {
     font-size: 48px;
   }
+  
 }

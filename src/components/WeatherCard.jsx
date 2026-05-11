@@ -1,5 +1,6 @@
 import { Droplets, Wind, Activity, Sun } from "lucide-react";
 import { getWeatherInfo } from "../utils/weatherCodes";
+import { getAqiInfo } from "../utils/airQuality";
 
 function convertTemp(temp, unit) {
   if (unit === "fahrenheit") {
@@ -14,6 +15,7 @@ function WeatherCard({ city, weather, airQuality, unit }) {
   const info = getWeatherInfo(current.weather_code);
   const unitSymbol = unit === "fahrenheit" ? "°F" : "°C";
   const aq = airQuality?.current;
+  const aqiInfo = aq ? getAqiInfo(aq.us_aqi) : null;
 
   return (
     <div className="weather-card">
@@ -50,21 +52,39 @@ function WeatherCard({ city, weather, airQuality, unit }) {
         <span>🌅 Sunrise: {weather.daily.sunrise[0].slice(11, 16)}</span>
         <span>🌇 Sunset: {weather.daily.sunset[0].slice(11, 16)}</span>
       </div>
-      <div className="air-quality-grid">
-        <span>🌫️ AQI: {aq.us_aqi}</span>
 
-        <span>
-          <Activity size={18} />
-          PM2.5: {aq.pm2_5}
-        </span>
+      {aq && (
+        <div className="air-quality">
+          <h3>Air Quality</h3>
 
-        <span>🏙️ PM10: {aq.pm10}</span>
+          <div className="aqi-status">
+            <strong
+              style={{
+                color: aqiInfo.color,
+              }}
+            >
+              ● {aqiInfo.label}
+            </strong>
+            <span>US AQI: {aq.us_aqi}</span>
+          </div>
 
-        <span>
-          <Sun size={18} />
-          UV: {aq.uv_index}
-        </span>
-      </div>
+          <div className="air-quality-grid">
+            <span>🌫️ AQI: {aq.us_aqi}</span>
+
+            <span>
+              <Activity size={18} />
+              PM2.5: {aq.pm2_5}
+            </span>
+
+            <span>🏙️ PM10: {aq.pm10}</span>
+
+            <span>
+              <Sun size={18} />
+              UV: {aq.uv_index}
+            </span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
