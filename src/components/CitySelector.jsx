@@ -12,13 +12,22 @@ function CitySelector({ cities, selectedCity, onCityChange }) {
     );
   });
 
+  function handleSearchSubmit(e) {
+    e.preventDefault();
+
+    if (filteredCities.length === 0) return;
+
+    onCityChange(filteredCities[0]);
+    setSearch("");
+  }
+
   return (
-    <div className="city-selector">
+    <form className="city-selector" onSubmit={handleSearchSubmit}>
       <label>Search Iran City</label>
 
       <input
         type="text"
-        placeholder="Search Tehran, Shiraz, مشهد..."
+        placeholder="Type Tehran, Shiraz, مشهد..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
@@ -38,10 +47,14 @@ function CitySelector({ cities, selectedCity, onCityChange }) {
         ))}
       </select>
 
+      <button type="submit" className="search-button">
+        Search Weather
+      </button>
+
       {filteredCities.length === 0 && (
         <p className="empty-message">No city found</p>
       )}
-    </div>
+    </form>
   );
 }
 

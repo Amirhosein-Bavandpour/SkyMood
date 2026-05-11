@@ -271,6 +271,30 @@ h1 {
   background: #2563eb;
 }
 
+.search-button {
+  margin: 5px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  padding: 12px 14px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.search-button:hover {
+  background: #1d4ed8;
+}
+
+.app.dark .search-button {
+  background: #3b82f6;
+}
+
+.app.dark .search-button:hover {
+  background: #2563eb;
+}
+
 @media (max-width: 768px) {
   .forecast-list {
     grid-template-columns: repeat(2, 1fr);
