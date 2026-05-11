@@ -16,6 +16,44 @@ body {
   justify-content: center;
 }
 
+.app.sunny {
+  background: linear-gradient(135deg, #fef3c7, #dbeafe);
+}
+
+.app.partly-cloudy {
+  background: linear-gradient(135deg, #e0f2fe, #f8fafc);
+}
+
+.app.cloudy {
+  background: linear-gradient(135deg, #cbd5e1, #f1f5f9);
+}
+
+.app.foggy {
+  background: linear-gradient(135deg, #e5e7eb, #cbd5e1);
+}
+
+.app.rainy {
+  background: linear-gradient(135deg, #bfdbfe, #64748b);
+}
+
+.app.snowy {
+  background: linear-gradient(135deg, #eff6ff, #e0f2fe);
+}
+
+.app.stormy {
+  background: linear-gradient(135deg, #1e293b, #475569);
+}
+
+.app.dark.sunny,
+.app.dark.partly-cloudy,
+.app.dark.cloudy,
+.app.dark.foggy,
+.app.dark.rainy,
+.app.dark.snowy,
+.app.dark.stormy {
+  background: linear-gradient(135deg, #020617, #0f172a);
+}
+
 .container {
   width: 100%;
   max-width: 900px;

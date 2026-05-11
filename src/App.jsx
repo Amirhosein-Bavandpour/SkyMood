@@ -65,8 +65,24 @@ function App() {
   setIsDarkMode(savedTheme === "dark");
   }, []);
 
+  function getWeatherClass() {
+  if (!weather?.current?.weather_code) return "";
+
+  const code = weather.current.weather_code;
+
+  if (code === 0) return "sunny";
+  if ([1, 2].includes(code)) return "partly-cloudy";
+  if (code === 3) return "cloudy";
+  if ([45, 48].includes(code)) return "foggy";
+  if ([51, 53, 55, 61, 63, 65, 80, 81, 82].includes(code)) return "rainy";
+  if ([71, 73, 75, 77, 85, 86].includes(code)) return "snowy";
+  if ([95, 96, 99].includes(code)) return "stormy";
+
+  return "";
+  }
+
   return (
-    <main className={`app ${isDarkMode ? "dark" : ""}`}>
+    <main className={`app ${isDarkMode ? "dark" : ""} ${getWeatherClass()}`}>
       <section className="container">
         <h1>Iran Weather Dashboard</h1>
         <p className="subtitle">Live weather forecast for Iranian cities</p>
