@@ -110,6 +110,7 @@ h1 {
   border-radius: 24px;
   padding: 24px;
   box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
+  margin-bottom: 10px;
 }
 
 .forecast h3 {
@@ -175,6 +176,61 @@ h1 {
 
 .recent-list button:hover {
   background: #bae6fd;
+}
+
+.theme-toggle {
+  display: block;
+  margin: 0 auto 24px;
+  border: none;
+  background: #0f172a;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.app.dark {
+  background: linear-gradient(135deg, #020617, #0f172a);
+  color: #e5e7eb;
+}
+
+.app.dark .subtitle,
+.app.dark .city-fa,
+.app.dark .recent-cities h3 {
+  color: #94a3b8;
+}
+
+.app.dark .weather-card,
+.app.dark .forecast {
+  background: rgba(15, 23, 42, 0.9);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.app.dark .forecast-item,
+.app.dark .weather-details span {
+  background: #1e293b;
+}
+
+.app.dark .city-selector input,
+.app.dark .city-selector select {
+  background: #1e293b;
+  color: #e5e7eb;
+  border-color: #334155;
+}
+
+.app.dark .theme-toggle {
+  background: #e5e7eb;
+  color: #0f172a;
+}
+
+.app.dark .recent-list button {
+  background: #1e3a8a;
+  color: #dbeafe;
+}
+
+.app.dark .recent-list button:hover {
+  background: #2563eb;
 }
 
 @media (max-width: 768px) {

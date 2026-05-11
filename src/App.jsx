@@ -13,6 +13,7 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   function updateRecentCities(city) {
     const updatedCities = [
@@ -27,6 +28,13 @@ function App() {
   function handleCityChange(city) {
     setSelectedCity(city);
     updateRecentCities(city);
+  }
+
+  function toggleTheme() {
+  setIsDarkMode((prev) => {
+    localStorage.setItem("theme", !prev ? "dark" : "light");
+    return !prev;
+  });
   }
 
   async function fetchWeather(city) {
@@ -52,11 +60,20 @@ function App() {
     fetchWeather(selectedCity);
   }, [selectedCity]);
 
+  useEffect(() => {
+  const savedTheme = localStorage.getItem("theme");
+  setIsDarkMode(savedTheme === "dark");
+  }, []);
+
   return (
-    <main className="app">
+    <main className={`app ${isDarkMode ? "dark" : ""}`}>
       <section className="container">
         <h1>Iran Weather Dashboard</h1>
         <p className="subtitle">Live weather forecast for Iranian cities</p>
+
+        <button className="theme-toggle" onClick={toggleTheme}>
+        {isDarkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
+        </button>
 
         <CitySelector
           cities={iranCities}
@@ -91,6 +108,7 @@ function App() {
             <ForecastList weather={weather} />
           </>
         )}
+        
       </section>
     </main>
   );
