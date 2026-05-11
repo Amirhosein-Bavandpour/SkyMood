@@ -33,3 +33,18 @@ export async function getWeatherByCoords(lat, lon) {
 
   return response.data;
 }
+
+const AIR_QUALITY_URL = "https://air-quality-api.open-meteo.com/v1/air-quality";
+
+export async function getAirQualityByCoords(lat, lon) {
+  const response = await axios.get(AIR_QUALITY_URL, {
+    params: {
+      latitude: lat,
+      longitude: lon,
+      current: "us_aqi,pm2_5,pm10,uv_index",
+      timezone: "auto",
+    },
+  });
+
+  return response.data;
+}

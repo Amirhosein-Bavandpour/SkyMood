@@ -1,4 +1,4 @@
-import { Droplets, Wind } from "lucide-react";
+import { Droplets, Wind, Activity, Sun } from "lucide-react";
 import { getWeatherInfo } from "../utils/weatherCodes";
 
 function convertTemp(temp, unit) {
@@ -9,10 +9,11 @@ function convertTemp(temp, unit) {
   return Math.round(temp);
 }
 
-function WeatherCard({ city, weather, unit }) {
+function WeatherCard({ city, weather, airQuality, unit }) {
   const current = weather.current;
   const info = getWeatherInfo(current.weather_code);
   const unitSymbol = unit === "fahrenheit" ? "°F" : "°C";
+  const aq = airQuality?.current;
 
   return (
     <div className="weather-card">
@@ -48,6 +49,21 @@ function WeatherCard({ city, weather, unit }) {
       <div className="sun-times">
         <span>🌅 Sunrise: {weather.daily.sunrise[0].slice(11, 16)}</span>
         <span>🌇 Sunset: {weather.daily.sunset[0].slice(11, 16)}</span>
+      </div>
+      <div className="air-quality-grid">
+        <span>🌫️ AQI: {aq.us_aqi}</span>
+
+        <span>
+          <Activity size={18} />
+          PM2.5: {aq.pm2_5}
+        </span>
+
+        <span>🏙️ PM10: {aq.pm10}</span>
+
+        <span>
+          <Sun size={18} />
+          UV: {aq.uv_index}
+        </span>
       </div>
     </div>
   );
