@@ -9,9 +9,25 @@ import ForecastList from "./components/ForecastList";
 
 function App() {
   const [selectedCity, setSelectedCity] = useState(iranCities[0]);
+  const [recentCities, setRecentCities] = useState([]);
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  function updateRecentCities(city) {
+    const updatedCities = [
+      city,
+      ...recentCities.filter((item) => item.name !== city.name),
+    ].slice(0, 5);
+
+    setRecentCities(updatedCities);
+    localStorage.setItem("recentCities", JSON.stringify(updatedCities));
+  }
+
+  function handleCityChange(city) {
+    setSelectedCity(city);
+    updateRecentCities(city);
+  }
 
   async function fetchWeather(city) {
     try {
@@ -28,6 +44,11 @@ function App() {
   }
 
   useEffect(() => {
+    const savedCities = JSON.parse(localStorage.getItem("recentCities")) || [];
+    setRecentCities(savedCities);
+  }, []);
+
+  useEffect(() => {
     fetchWeather(selectedCity);
   }, [selectedCity]);
 
@@ -40,8 +61,26 @@ function App() {
         <CitySelector
           cities={iranCities}
           selectedCity={selectedCity}
-          onCityChange={setSelectedCity}
+          onCityChange={handleCityChange}
         />
+
+        {recentCities.length > 0 && (
+          <div className="recent-cities">
+            <h3>Recent Cities</h3>
+
+            <div className="recent-list">
+              {recentCities.map((city) => (
+                <button
+                  key={city.name}
+                  type="button"
+                  onClick={() => handleCityChange(city)}
+                >
+                  {city.name}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {loading && <p className="status">Loading weather...</p>}
         {error && <p className="error">{error}</p>}
