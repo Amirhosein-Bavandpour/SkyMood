@@ -5,6 +5,7 @@ import { iranCities } from "./data/iranCities";
 import CitySelector from "./components/CitySelector";
 import WeatherCard from "./components/WeatherCard";
 import ForecastList from "./components/ForecastList";
+import SkeletonWeather from "./components/SkeletonWeather";
 
 function App() {
   const [selectedCity, setSelectedCity] = useState(iranCities[0]);
@@ -150,10 +151,10 @@ function App() {
           </div>
         )}
 
-        {loading && <p className="status">Loading weather...</p>}
+        {loading && <SkeletonWeather />}
         {error && <p className="error">{error}</p>}
 
-        {weather && !loading && (
+        {weather && !loading && !error && (
           <>
             <WeatherCard
             city={locationName ? { name: locationName, faName: "" } : selectedCity}
