@@ -1,21 +1,27 @@
 import { useState } from "react";
+import { normalizeText } from "../utils/textNormalize";
 
 function CitySelector({ cities, selectedCity, onCityChange }) {
   const [search, setSearch] = useState("");
 
+  if (!selectedCity) {
+    return null;
+  }
+
   const filteredCities = cities.filter((city) => {
-    const query = search.toLowerCase().trim();
+    const query = normalizeText(search);
 
     return (
-      city.name.toLowerCase().includes(query) ||
-      city.faName.includes(search.trim())
+      normalizeText(city.name).includes(query) ||
+      normalizeText(city.faName).includes(query) ||
+      normalizeText(city.province).includes(query)
     );
   });
 
   function handleSearchSubmit(e) {
     e.preventDefault();
 
-    if (filteredCities.length === 0) return;
+    if (!filteredCities.length) return;
 
     onCityChange(filteredCities[0]);
     setSearch("");
@@ -36,7 +42,10 @@ function CitySelector({ cities, selectedCity, onCityChange }) {
         value={selectedCity.name}
         onChange={(e) => {
           const city = cities.find((item) => item.name === e.target.value);
-          onCityChange(city);
+          if (city) {
+            onCityChange(city);
+            setSearch("");
+          }
           setSearch("");
         }}
       >

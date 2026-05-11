@@ -5,14 +5,15 @@ import {
   getWeatherByCoords,
   getAirQualityByCoords,
 } from "./api/weatherApi";
-import { iranCities } from "./data/iranCities";
+import { loadIranCities } from "./data/loadCities";
 import CitySelector from "./components/CitySelector";
 import WeatherCard from "./components/WeatherCard";
 import ForecastList from "./components/ForecastList";
 import SkeletonWeather from "./components/SkeletonWeather";
 
 function App() {
-  const [selectedCity, setSelectedCity] = useState(iranCities[0]);
+  const [cities, setCities] = useState([]);
+  const [selectedCity, setSelectedCity] = useState(null);
   const [recentCities, setRecentCities] = useState([]);
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -104,12 +105,28 @@ function App() {
   }
 
   useEffect(() => {
+    async function fetchCities() {
+      const loadedCities = await loadIranCities();
+
+      setCities(loadedCities);
+
+      if (loadedCities.length > 0) {
+        setSelectedCity(loadedCities[0]);
+      }
+    }
+
+    fetchCities();
+  }, []);
+
+  useEffect(() => {
     const savedCities = JSON.parse(localStorage.getItem("recentCities")) || [];
     setRecentCities(savedCities);
   }, []);
 
   useEffect(() => {
-    fetchWeather(selectedCity);
+    if (selectedCity) {
+      fetchWeather(selectedCity);
+    }
   }, [selectedCity]);
 
   useEffect(() => {
@@ -118,7 +135,7 @@ function App() {
   }, []);
 
   function getWeatherClass() {
-    if (!weather?.current?.weather_code) return "";
+    if (weather?.current?.weather_code === undefined) return "";
 
     const code = weather.current.weather_code;
 
@@ -138,7 +155,7 @@ function App() {
       <section className="container">
         <h1>Iran Weather Dashboard</h1>
         <p className="subtitle">Live weather forecast for Iranian cities</p>
-        <div class="button-group">
+        <div className="button-group">
           <button className="theme-toggle" onClick={toggleTheme}>
             {isDarkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
           </button>
@@ -151,12 +168,13 @@ function App() {
             {unit === "celsius" ? "°F Fahrenheit" : "°C Celsius"}
           </button>
         </div>
-        <CitySelector
-          cities={iranCities}
-          selectedCity={selectedCity}
-          onCityChange={handleCityChange}
-        />
-
+        {selectedCity && (
+          <CitySelector
+            cities={cities}
+            selectedCity={selectedCity}
+            onCityChange={handleCityChange}
+          />
+        )}
         {recentCities.length > 0 && (
           <div className="recent-cities">
             <h3>Recent Cities</h3>
@@ -178,7 +196,7 @@ function App() {
         {loading && <SkeletonWeather />}
         {error && <p className="error">{error}</p>}
 
-        {weather && !loading && !error && (
+        {weather && selectedCity && !loading && !error && (
           <>
             <WeatherCard
               city={
@@ -188,6 +206,7 @@ function App() {
               airQuality={airQuality}
               unit={unit}
             />
+
             <ForecastList weather={weather} unit={unit} />
           </>
         )}
