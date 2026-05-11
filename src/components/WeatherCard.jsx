@@ -16,15 +16,24 @@ function WeatherCard({ city, weather }) {
       <p>{info.label}</p>
 
       <div className="weather-details">
-        <span>
-          <Droplets size={18} />
-          {current.relative_humidity_2m}%
-        </span>
+       <span>
+       🌡️ Feels like {Math.round(current.apparent_temperature)}°C
+       </span>
 
-        <span>
-          <Wind size={18} />
-          {current.wind_speed_10m} km/h
-        </span>
+       <span>
+       <Droplets size={18} />
+       {current.relative_humidity_2m}%
+       </span>
+
+       <span>
+       <Wind size={18} />
+       {current.wind_speed_10m} km/h
+       </span>
+      </div>
+
+      <div className="sun-times">
+       <span>🌅 Sunrise: {weather.daily.sunrise[0].slice(11, 16)}</span>
+       <span>🌇 Sunset: {weather.daily.sunset[0].slice(11, 16)}</span>
       </div>
     </div>
   );

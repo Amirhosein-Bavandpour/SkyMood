@@ -391,6 +391,30 @@ h1 {
   background-size: 200% 100%;
 }
 
+.sun-times {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  color: #475569;
+}
+
+.sun-times span {
+  background: #f8fafc;
+  padding: 9px 13px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.app.dark .sun-times {
+  color: #cbd5e1;
+}
+
+.app.dark .sun-times span {
+  background: #1e293b;
+}
+
 @media (max-width: 768px) {
   .forecast-list {
     grid-template-columns: repeat(2, 1fr);
