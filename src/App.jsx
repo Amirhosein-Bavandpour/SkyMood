@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Compare from "./pages/Compare";
 import About from "./pages/About";
 import { AnimatePresence } from "framer-motion";
+import WeatherBackground from "./components/WeatherBackground";
 
 function App() {
   const location = useLocation();
@@ -52,6 +53,7 @@ function App() {
       className={`app ${isDarkMode ? "dark" : ""} ${weatherMood}`}
       dir={language === "fa" ? "rtl" : "ltr"}
     >
+      <WeatherBackground mood={weatherMood} />
       <Navbar t={t} language={language} toggleLanguage={toggleLanguage} />
 
       <AnimatePresence mode="wait">

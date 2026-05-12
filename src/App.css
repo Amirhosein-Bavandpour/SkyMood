@@ -13,16 +13,202 @@ body {
   width: 100%;
   min-height: 100vh;
   padding: 32px 16px;
-
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  overflow-x: hidden;
   background: linear-gradient(135deg, #dbeafe, #f8fafc);
   color: #0f172a;
 }
 
 /* WEATHER BACKGROUNDS */
+
+.navbar,
+.page,
+.home-page {
+  position: relative;
+  z-index: 2;
+}
+
+.weather-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* SUN */
+
+.sun-layer {
+  position: absolute;
+  top: 80px;
+  right: 100px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: rgba(251, 191, 36, 0.35);
+  box-shadow: 0 0 80px rgba(251, 191, 36, 0.5);
+  animation: sunPulse 4s ease-in-out infinite;
+}
+
+@keyframes sunPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+}
+
+/* CLOUDS */
+
+.cloud-layer span {
+  position: absolute;
+  width: 220px;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  filter: blur(1px);
+  animation: cloudMove 28s linear infinite;
+}
+
+.cloud-layer span::before,
+.cloud-layer span::after {
+  content: "";
+  position: absolute;
+  background: inherit;
+  border-radius: 50%;
+}
+
+.cloud-layer span::before {
+  width: 90px;
+  height: 90px;
+  top: -42px;
+  left: 36px;
+}
+
+.cloud-layer span::after {
+  width: 120px;
+  height: 120px;
+  top: -64px;
+  right: 32px;
+}
+
+.cloud-layer span:nth-child(1) {
+  top: 120px;
+  left: -260px;
+  animation-delay: 0s;
+}
+
+.cloud-layer span:nth-child(2) {
+  top: 260px;
+  left: -360px;
+  transform: scale(0.75);
+  animation-delay: 8s;
+}
+
+.cloud-layer span:nth-child(3) {
+  top: 420px;
+  left: -300px;
+  transform: scale(1.1);
+  animation-delay: 15s;
+}
+
+@keyframes cloudMove {
+  from {
+    translate: -20vw 0;
+  }
+
+  to {
+    translate: 140vw 0;
+  }
+}
+
+/* RAIN */
+
+.rain-layer span {
+  position: absolute;
+  top: -80px;
+  left: calc(var(--i) * 2.3vw);
+  width: 2px;
+  height: 70px;
+  background: rgba(59, 130, 246, 0.35);
+  border-radius: 999px;
+  animation: rainFall linear infinite;
+  animation-duration: calc(0.7s + (var(--i) * 0.03s));
+  animation-delay: calc(var(--i) * -0.08s);
+}
+
+@keyframes rainFall {
+  to {
+    transform: translateY(120vh);
+  }
+}
+
+/* SNOW */
+
+.snow-layer span {
+  position: absolute;
+  top: -30px;
+  left: calc(var(--i) * 3vw);
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 50%;
+  animation: snowFall linear infinite;
+  animation-duration: calc(5s + (var(--i) * 0.08s));
+  animation-delay: calc(var(--i) * -0.18s);
+}
+
+@keyframes snowFall {
+  to {
+    transform: translateY(110vh) translateX(80px);
+  }
+}
+
+/* STORM */
+
+.storm-layer {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.18);
+  animation: lightning 5s infinite;
+}
+
+@keyframes lightning {
+  0%,
+  92%,
+  100% {
+    opacity: 0;
+  }
+
+  94% {
+    opacity: 0.55;
+  }
+
+  96% {
+    opacity: 0.1;
+  }
+
+  98% {
+    opacity: 0.75;
+  }
+}
+
+/* DARK MODE SOFTER EFFECTS */
+
+.app.dark .sun-layer,
+.app.dark .cloud-layer span,
+.app.dark .snow-layer span,
+.app.dark .rain-layer span {
+  opacity: 0.45;
+}
 
 .app.sunny {
   background: linear-gradient(135deg, #fef3c7, #dbeafe);
