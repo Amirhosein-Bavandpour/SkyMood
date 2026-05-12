@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-
 import { loadIranCities } from "./data/loadCities";
 import {
   getWeatherByCity,
   getWeatherByCoords,
   getAirQualityByCoords,
 } from "../api/weatherApi";
-
+import WeatherCharts from "../components/WeatherCharts";
 import CitySelector from "../components/CitySelector";
 import WeatherCard from "../components/WeatherCard";
 import ForecastList from "../components/ForecastList";
@@ -217,18 +216,26 @@ function Home({ isDarkMode, toggleTheme, updateWeatherMood }) {
         {loading && <SkeletonWeather />}
 
         {weather && !loading && !error && (
-          <>
-            <WeatherCard
-              city={
-                locationName ? { name: locationName, faName: "" } : selectedCity
-              }
-              weather={weather}
-              airQuality={airQuality}
-              unit={unit}
-            />
+          <div className="dashboard-grid">
+            <div className="dashboard-main">
+              <WeatherCard
+                city={
+                  locationName
+                    ? { name: locationName, faName: "" }
+                    : selectedCity
+                }
+                weather={weather}
+                airQuality={airQuality}
+                unit={unit}
+              />
 
-            <ForecastList weather={weather} unit={unit} />
-          </>
+              <ForecastList weather={weather} unit={unit} />
+            </div>
+
+            <div className="dashboard-side">
+              <WeatherCharts weather={weather} unit={unit} />
+            </div>
+          </div>
         )}
       </section>
     </div>
