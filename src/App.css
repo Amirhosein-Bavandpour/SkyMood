@@ -474,7 +474,7 @@ h1 {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin-top:5px;
+  margin-top: 5px;
 }
 
 .app.dark .air-quality-grid span {
@@ -502,6 +502,78 @@ h1 {
   grid-template-columns: repeat(3, 1fr);
 }
 
+.comparison {
+  margin-top: 28px;
+  background: white;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
+}
+
+.comparison h3 {
+  margin-top: 0;
+}
+
+.comparison-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+}
+
+.comparison-controls select,
+.comparison-controls button {
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #cbd5e1;
+  font-size: 15px;
+}
+
+.comparison-controls button {
+  border: none;
+  background: #0f172a;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.comparison-result {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.comparison-result > div {
+  background: #f8fafc;
+  border-radius: 18px;
+  padding: 18px;
+  text-align: center;
+}
+
+.compare-icon {
+  font-size: 36px;
+  margin: 8px 0;
+}
+
+.app.dark .comparison {
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.app.dark .comparison-result > div {
+  background: #1e293b;
+}
+
+.app.dark .comparison-controls select {
+  background: #1e293b;
+  color: #e5e7eb;
+  border-color: #334155;
+}
+
+.app.dark .comparison-controls button {
+  background: #e5e7eb;
+  color: #0f172a;
+}
+
 @media (max-width: 768px) {
   .forecast-list {
     grid-template-columns: repeat(2, 1fr);
@@ -514,5 +586,12 @@ h1 {
   .weather-card h1 {
     font-size: 48px;
   }
-  
+
+  .comparison-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-result {
+    grid-template-columns: 1fr;
+  }
 }

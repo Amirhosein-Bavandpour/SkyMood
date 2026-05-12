@@ -10,6 +10,7 @@ import CitySelector from "./components/CitySelector";
 import WeatherCard from "./components/WeatherCard";
 import ForecastList from "./components/ForecastList";
 import SkeletonWeather from "./components/SkeletonWeather";
+import CityComparison from "./components/CityComparison";
 
 function App() {
   const [cities, setCities] = useState([]);
@@ -208,6 +209,7 @@ function App() {
             />
 
             <ForecastList weather={weather} unit={unit} />
+            <CityComparison cities={cities} unit={unit} />
           </>
         )}
       </section>
