@@ -1,12 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getWeatherByCity } from "../api/weatherApi";
 import { getWeatherInfo } from "../utils/weatherCodes";
 
-function CityComparison({ cities, unit }) {
-  const [firstCity, setFirstCity] = useState(cities[0]);
-  const [secondCity, setSecondCity] = useState(cities[1]);
+function CityComparison({ cities = [], unit = "celsius" }) {
+  const [firstCity, setFirstCity] = useState(cities[0] || null);
+  const [secondCity, setSecondCity] = useState(cities[1] || cities[0] || null);
   const [comparison, setComparison] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (cities.length > 0) {
+      setFirstCity(cities[0]);
+      setSecondCity(cities[1] || cities[0]);
+    }
+  }, [cities]);
+
+  if (!firstCity || !secondCity) {
+    return <p className="error">No cities available for comparison.</p>;
+  }
 
   function convertTemp(temp) {
     if (unit === "fahrenheit") {
@@ -40,10 +51,11 @@ function CityComparison({ cities, unit }) {
 
       <div className="comparison-controls">
         <select
-          value={firstCity.name}
-          onChange={(e) =>
-            setFirstCity(cities.find((city) => city.name === e.target.value))
-          }
+          value={firstCity?.name || ""}
+          onChange={(e) => {
+            const city = cities.find((city) => city.name === e.target.value);
+            if (city) setFirstCity(city);
+          }}
         >
           {cities.map((city) => (
             <option key={city.name} value={city.name}>
@@ -53,10 +65,11 @@ function CityComparison({ cities, unit }) {
         </select>
 
         <select
-          value={secondCity.name}
-          onChange={(e) =>
-            setSecondCity(cities.find((city) => city.name === e.target.value))
-          }
+          value={secondCity?.name || ""}
+          onChange={(e) => {
+            const city = cities.find((city) => city.name === e.target.value);
+            if (city) setSecondCity(city);
+          }}
         >
           {cities.map((city) => (
             <option key={city.name} value={city.name}>

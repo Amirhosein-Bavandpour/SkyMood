@@ -1,27 +1,22 @@
 import { useState } from "react";
 import { normalizeText } from "../utils/textNormalize";
 
-function CitySelector({ cities, selectedCity, onCityChange }) {
+function CitySelector({ cities = [], selectedCity, onCityChange }) {
   const [search, setSearch] = useState("");
 
-  if (!selectedCity) {
-    return null;
-  }
-
   const filteredCities = cities.filter((city) => {
-    const query = normalizeText(search);
+    const query = search.toLowerCase().trim();
 
     return (
-      normalizeText(city.name).includes(query) ||
-      normalizeText(city.faName).includes(query) ||
-      normalizeText(city.province).includes(query)
+      city.name?.toLowerCase().includes(query) ||
+      city.faName?.toLowerCase().includes(query)
     );
   });
 
   function handleSearchSubmit(e) {
     e.preventDefault();
 
-    if (!filteredCities.length) return;
+    if (filteredCities.length === 0) return;
 
     onCityChange(filteredCities[0]);
     setSearch("");
@@ -39,14 +34,14 @@ function CitySelector({ cities, selectedCity, onCityChange }) {
       />
 
       <select
-        value={selectedCity.name}
+        value={selectedCity?.name || ""}
         onChange={(e) => {
           const city = cities.find((item) => item.name === e.target.value);
+
           if (city) {
             onCityChange(city);
             setSearch("");
           }
-          setSearch("");
         }}
       >
         {filteredCities.map((city) => (

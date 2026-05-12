@@ -1,5 +1,5 @@
 import Papa from "papaparse";
-import { normalizeText } from "../utils/textNormalize";
+import { normalizeText } from "../../utils/textNormalize";
 
 export async function loadIranCities() {
   const response = await fetch("/ir.csv");
