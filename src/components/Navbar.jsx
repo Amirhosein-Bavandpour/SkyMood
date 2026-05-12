@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function Navbar({ t, language, toggleLanguage }) {
   return (
@@ -10,9 +11,14 @@ function Navbar({ t, language, toggleLanguage }) {
         <NavLink to="/compare">{t.compare}</NavLink>
         <NavLink to="/about">{t.about}</NavLink>
 
-        <button className="language-toggle" onClick={toggleLanguage}>
+        <motion.button
+          className="language-toggle"
+          onClick={toggleLanguage}
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.92 }}
+        >
           {language === "en" ? "FA" : "EN"}
-        </button>
+        </motion.button>
       </div>
     </nav>
   );

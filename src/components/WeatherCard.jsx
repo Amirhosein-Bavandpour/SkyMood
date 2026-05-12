@@ -1,6 +1,8 @@
 import { Droplets, Wind, Activity, Sun } from "lucide-react";
 import { getWeatherInfo } from "../utils/weatherCodes";
 import { getAqiInfo } from "../utils/airQuality";
+import { motion } from "framer-motion";
+import { cardAnimation } from "../utils/animations";
 
 function convertTemp(temp, unit) {
   if (unit === "fahrenheit") {
@@ -18,7 +20,12 @@ function WeatherCard({ city, weather, airQuality, unit, t }) {
   const aqiInfo = aq ? getAqiInfo(aq.us_aqi) : null;
 
   return (
-    <div className="weather-card">
+    <motion.div
+      className="weather-card"
+      variants={cardAnimation}
+      initial="hidden"
+      animate="visible"
+    >
       <h2>{city.name}</h2>
       <p className="city-fa">{city.faName}</p>
 
@@ -89,7 +96,7 @@ function WeatherCard({ city, weather, airQuality, unit, t }) {
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
 

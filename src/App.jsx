@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
 import { translations } from "./i18n/translations";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Compare from "./pages/Compare";
 import About from "./pages/About";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
+  const location = useLocation();
   const [weatherMood, setWeatherMood] = useState(
     localStorage.getItem("weatherMood") || "",
   );
@@ -52,22 +54,29 @@ function App() {
     >
       <Navbar t={t} language={language} toggleLanguage={toggleLanguage} />
 
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              isDarkMode={isDarkMode}
-              toggleTheme={toggleTheme}
-              updateWeatherMood={updateWeatherMood}
-              t={t}
-              language={language}
-            />
-          }
-        />
-        <Route path="/compare" element={<Compare t={t} language={language} />} />
-        <Route path="/about" element={<About t={t} />} />
-      </Routes>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route
+            path="/"
+            element={
+              <Home
+                isDarkMode={isDarkMode}
+                toggleTheme={toggleTheme}
+                updateWeatherMood={updateWeatherMood}
+                t={t}
+                language={language}
+              />
+            }
+          />
+
+          <Route
+            path="/compare"
+            element={<Compare t={t} language={language} />}
+          />
+
+          <Route path="/about" element={<About t={t} />} />
+        </Routes>
+      </AnimatePresence>
     </main>
   );
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getWeatherByCity } from "../api/weatherApi";
 import { getWeatherInfo } from "../utils/weatherCodes";
+import { motion } from "framer-motion";
 
 function CityComparison({ cities = [], unit, t }) {
   const [firstCity, setFirstCity] = useState(cities[0] || null);
@@ -78,9 +79,13 @@ function CityComparison({ cities = [], unit, t }) {
           ))}
         </select>
 
-        <button onClick={handleCompare}>
+        <motion.button
+          onClick={handleCompare}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
           {loading ? t.comparing : t.compareButton}
-        </button>
+        </motion.button>
       </div>
 
       {comparison && (

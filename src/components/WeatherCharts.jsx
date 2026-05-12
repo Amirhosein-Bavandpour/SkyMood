@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+import { cardAnimation } from "../utils/animations";
 import {
   LineChart,
   Line,
@@ -41,7 +43,12 @@ function WeatherCharts({ weather, unit, t, language }) {
     <section className="charts">
       <h3>{t.weatherAnalytics}</h3>
 
-      <div className="chart-card">
+      <motion.div
+        className="chart-card"
+        variants={cardAnimation}
+        initial="hidden"
+        animate="visible"
+      >
         <h4>{t.next24Hours}</h4>
 
         <ResponsiveContainer width="100%" height={280}>
@@ -59,9 +66,14 @@ function WeatherCharts({ weather, unit, t, language }) {
             />
           </LineChart>
         </ResponsiveContainer>
-      </div>
+      </motion.div>
 
-      <div className="chart-card">
+      <motion.div
+        className="chart-card"
+        variants={cardAnimation}
+        initial="hidden"
+        animate="visible"
+      >
         <h4>{t.sevenDayMaxMin}</h4>
 
         <ResponsiveContainer width="100%" height={280}>
@@ -85,7 +97,7 @@ function WeatherCharts({ weather, unit, t, language }) {
             />
           </LineChart>
         </ResponsiveContainer>
-      </div>
+      </motion.div>
     </section>
   );
 }

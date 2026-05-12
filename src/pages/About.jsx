@@ -1,6 +1,15 @@
+import { motion } from "framer-motion";
+import { pageAnimation } from "../utils/animations";
+
 function About({ t }) {
   return (
-    <div className="page">
+    <motion.div
+      className="page"
+      variants={pageAnimation}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
       <section className="container about-page">
         <h1>{t.aboutTitle}</h1>
 
@@ -8,7 +17,7 @@ function About({ t }) {
 
         <p>{t.aboutTextTwo}</p>
       </section>
-    </div>
+    </motion.div>
   );
 }
 

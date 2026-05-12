@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { normalizeText } from "../utils/textNormalize";
+import { motion } from "framer-motion";
 
 function CitySelector({ cities = [], selectedCity, onCityChange, t }) {
   const [search, setSearch] = useState("");
@@ -51,9 +52,14 @@ function CitySelector({ cities = [], selectedCity, onCityChange, t }) {
         ))}
       </select>
 
-      <button type="submit" className="search-button">
+      <motion.button
+        type="submit"
+        className="search-button"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
         {t.searchWeather}
-      </button>
+      </motion.button>
 
       {filteredCities.length === 0 && (
         <p className="empty-message">{t.noCityFound}</p>

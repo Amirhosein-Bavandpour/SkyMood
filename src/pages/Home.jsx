@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { loadIranCities } from "./data/loadCities";
+import { motion } from "framer-motion";
 import {
   getWeatherByCity,
   getWeatherByCoords,
@@ -10,6 +11,7 @@ import CitySelector from "../components/CitySelector";
 import WeatherCard from "../components/WeatherCard";
 import ForecastList from "../components/ForecastList";
 import SkeletonWeather from "../components/SkeletonWeather";
+import { pageAnimation } from "../utils/animations";
 
 function getWeatherClassByCode(code) {
   if (code === 0) return "sunny";
@@ -169,22 +171,43 @@ function Home({ isDarkMode, toggleTheme, updateWeatherMood, t, language }) {
   }, [selectedCity]);
 
   return (
-    <div className="home-page">
+    <motion.div
+      className="home-page"
+      variants={pageAnimation}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
       <section className="container">
         <h1>{t.dashboardTitle}</h1>
         <p className="subtitle">{t.dashboardSubtitle}</p>
         <div className="button-group">
-          <button className="theme-toggle" onClick={toggleTheme}>
+          <motion.button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             {isDarkMode ? t.lightMode : t.darkMode}
-          </button>
+          </motion.button>
 
-          <button className="location-button" onClick={handleUseMyLocation}>
+          <motion.button
+            className="location-button"
+            onClick={handleUseMyLocation}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             {t.useMyLocation}
-          </button>
+          </motion.button>
 
-          <button className="unit-toggle" onClick={toggleUnit}>
+          <motion.button
+            className="unit-toggle"
+            onClick={toggleUnit}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             {unit === "celsius" ? t.fahrenheit : t.celsius}
-          </button>
+          </motion.button>
         </div>
 
         <CitySelector
@@ -249,7 +272,7 @@ function Home({ isDarkMode, toggleTheme, updateWeatherMood, t, language }) {
           </div>
         )}
       </section>
-    </div>
+    </motion.div>
   );
 }
 

@@ -1,4 +1,6 @@
 import { getWeatherInfo } from "../utils/weatherCodes";
+import { motion } from "framer-motion";
+import { staggerContainer, itemAnimation } from "../utils/animations";
 
 function convertTemp(temp, unit) {
   if (unit === "fahrenheit") {
@@ -13,7 +15,12 @@ function ForecastList({ weather, unit, t, language }) {
   const unitSymbol = unit === "fahrenheit" ? "°F" : "°C";
 
   return (
-    <div className="forecast">
+    <motion.div
+      className="forecast"
+      variants={staggerContainer}
+      initial="hidden"
+      animate="visible"
+    >
       <h3>{t.forecast}</h3>
 
       <div className="forecast-list">
@@ -21,7 +28,11 @@ function ForecastList({ weather, unit, t, language }) {
           const info = getWeatherInfo(daily.weather_code[index]);
 
           return (
-            <div className="forecast-item" key={day}>
+            <motion.div
+              className="forecast-item"
+              key={day}
+              variants={itemAnimation}
+            >
               <p>
                 {new Date(day).toLocaleDateString(
                   language === "fa" ? "fa-IR" : "en-US",
@@ -39,11 +50,11 @@ function ForecastList({ weather, unit, t, language }) {
                 {convertTemp(daily.temperature_2m_min[index], unit)}
                 {unitSymbol}
               </p>
-            </div>
+            </motion.div>
           );
         })}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

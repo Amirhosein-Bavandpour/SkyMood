@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import CityComparison from "../components/CityComparison";
 import { loadIranCities } from "./data/loadCities";
+import { motion } from "framer-motion";
+import { pageAnimation } from "../utils/animations";
 
 function Compare({ t, language }) {
   const [cities, setCities] = useState([]);
@@ -15,7 +17,13 @@ function Compare({ t, language }) {
   }, []);
 
   return (
-    <div className="page">
+    <motion.div
+      className="page"
+      variants={pageAnimation}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
       <section className="container">
         <h1>{t.compareTitle}</h1>
         <p className="subtitle">{t.compareSubtitle}</p>
@@ -26,7 +34,7 @@ function Compare({ t, language }) {
           language={language}
         />
       </section>
-    </div>
+    </motion.div>
   );
 }
 
