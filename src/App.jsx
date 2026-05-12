@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-
+import { translations } from "./i18n/translations";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Compare from "./pages/Compare";
@@ -14,6 +14,19 @@ function App() {
   const [isDarkMode, setIsDarkMode] = useState(
     localStorage.getItem("theme") === "dark",
   );
+  const [language, setLanguage] = useState(
+    localStorage.getItem("language") || "en",
+  );
+
+  const t = translations[language];
+
+  function toggleLanguage() {
+    setLanguage((prev) => {
+      const nextLanguage = prev === "en" ? "fa" : "en";
+      localStorage.setItem("language", nextLanguage);
+      return nextLanguage;
+    });
+  }
 
   function updateWeatherMood(mood) {
     setWeatherMood(mood);
@@ -33,8 +46,11 @@ function App() {
   }, [isDarkMode]);
 
   return (
-    <main className={`app ${isDarkMode ? "dark" : ""} ${weatherMood}`}>
-      <Navbar />
+    <main
+      className={`app ${isDarkMode ? "dark" : ""} ${weatherMood}`}
+      dir={language === "fa" ? "rtl" : "ltr"}
+    >
+      <Navbar t={t} language={language} toggleLanguage={toggleLanguage} />
 
       <Routes>
         <Route
@@ -44,11 +60,13 @@ function App() {
               isDarkMode={isDarkMode}
               toggleTheme={toggleTheme}
               updateWeatherMood={updateWeatherMood}
+              t={t}
+              language={language}
             />
           }
         />
-        <Route path="/compare" element={<Compare />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/compare" element={<Compare t={t} language={language} />} />
+        <Route path="/about" element={<About t={t} />} />
       </Routes>
     </main>
   );

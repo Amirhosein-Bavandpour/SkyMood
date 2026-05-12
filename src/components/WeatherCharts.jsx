@@ -9,7 +9,7 @@ import {
   Legend,
 } from "recharts";
 
-function WeatherCharts({ weather, unit }) {
+function WeatherCharts({ weather, unit, t, language }) {
   const unitSymbol = unit === "fahrenheit" ? "°F" : "°C";
 
   function convertTemp(temp) {
@@ -27,19 +27,22 @@ function WeatherCharts({ weather, unit }) {
   }));
 
   const dailyData = weather.daily.time.map((day, index) => ({
-    day: new Date(day).toLocaleDateString("en-US", {
-      weekday: "short",
-    }),
+    day: new Date(day).toLocaleDateString(
+      language === "fa" ? "fa-IR" : "en-US",
+      {
+        weekday: "short",
+      },
+    ),
     max: convertTemp(weather.daily.temperature_2m_max[index]),
     min: convertTemp(weather.daily.temperature_2m_min[index]),
   }));
 
   return (
     <section className="charts">
-      <h3>Weather Analytics</h3>
+      <h3>{t.weatherAnalytics}</h3>
 
       <div className="chart-card">
-        <h4>Next 24 Hours Temperature</h4>
+        <h4>{t.next24Hours}</h4>
 
         <ResponsiveContainer width="100%" height={280}>
           <LineChart data={hourlyData}>
@@ -59,7 +62,7 @@ function WeatherCharts({ weather, unit }) {
       </div>
 
       <div className="chart-card">
-        <h4>7-Day Max / Min Temperature</h4>
+        <h4>{t.sevenDayMaxMin}</h4>
 
         <ResponsiveContainer width="100%" height={280}>
           <LineChart data={dailyData}>

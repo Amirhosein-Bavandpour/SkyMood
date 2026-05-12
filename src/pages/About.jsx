@@ -1,20 +1,12 @@
-function About() {
+function About({ t }) {
   return (
     <div className="page">
       <section className="container about-page">
-        <h1>About This App</h1>
+        <h1>{t.aboutTitle}</h1>
 
-        <p>
-          Iran Weather Dashboard is a React weather application focused on
-          Iranian cities. It uses Open-Meteo APIs to show live weather,
-          forecast, air quality, UV index, city comparison, and location-based
-          weather.
-        </p>
+        <p>{t.aboutTextOne}</p>
 
-        <p>
-          Built with React, Vite, Axios, localStorage, responsive CSS, and
-          component-based architecture.
-        </p>
+        <p>{t.aboutTextTwo}</p>
       </section>
     </div>
   );

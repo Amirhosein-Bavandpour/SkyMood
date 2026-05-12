@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getWeatherByCity } from "../api/weatherApi";
 import { getWeatherInfo } from "../utils/weatherCodes";
 
-function CityComparison({ cities = [], unit = "celsius" }) {
+function CityComparison({ cities = [], unit, t }) {
   const [firstCity, setFirstCity] = useState(cities[0] || null);
   const [secondCity, setSecondCity] = useState(cities[1] || cities[0] || null);
   const [comparison, setComparison] = useState(null);
@@ -79,7 +79,7 @@ function CityComparison({ cities = [], unit = "celsius" }) {
         </select>
 
         <button onClick={handleCompare}>
-          {loading ? "Comparing..." : "Compare"}
+          {loading ? t.comparing : t.compareButton}
         </button>
       </div>
 

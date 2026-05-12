@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { normalizeText } from "../utils/textNormalize";
 
-function CitySelector({ cities = [], selectedCity, onCityChange }) {
+function CitySelector({ cities = [], selectedCity, onCityChange, t }) {
   const [search, setSearch] = useState("");
 
   const filteredCities = cities.filter((city) => {
@@ -24,11 +24,11 @@ function CitySelector({ cities = [], selectedCity, onCityChange }) {
 
   return (
     <form className="city-selector" onSubmit={handleSearchSubmit}>
-      <label>Search Iran City</label>
+      <label>{t.searchCity}</label>
 
       <input
         type="text"
-        placeholder="Type Tehran, Shiraz, مشهد..."
+        placeholder={t.searchPlaceholder}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
@@ -52,11 +52,11 @@ function CitySelector({ cities = [], selectedCity, onCityChange }) {
       </select>
 
       <button type="submit" className="search-button">
-        Search Weather
+        {t.searchWeather}
       </button>
 
       {filteredCities.length === 0 && (
-        <p className="empty-message">No city found</p>
+        <p className="empty-message">{t.noCityFound}</p>
       )}
     </form>
   );

@@ -10,7 +10,7 @@ function convertTemp(temp, unit) {
   return Math.round(temp);
 }
 
-function WeatherCard({ city, weather, airQuality, unit }) {
+function WeatherCard({ city, weather, airQuality, unit, t }) {
   const current = weather.current;
   const info = getWeatherInfo(current.weather_code);
   const unitSymbol = unit === "fahrenheit" ? "°F" : "°C";
@@ -33,7 +33,7 @@ function WeatherCard({ city, weather, airQuality, unit }) {
 
       <div className="weather-details">
         <span>
-          🌡️ Feels like {convertTemp(current.apparent_temperature, unit)}
+          🌡️ {t.feelsLike} {convertTemp(current.apparent_temperature, unit)}
           {unitSymbol}
         </span>
 
@@ -49,13 +49,17 @@ function WeatherCard({ city, weather, airQuality, unit }) {
       </div>
 
       <div className="sun-times">
-        <span>🌅 Sunrise: {weather.daily.sunrise[0].slice(11, 16)}</span>
-        <span>🌇 Sunset: {weather.daily.sunset[0].slice(11, 16)}</span>
+        <span>
+          🌅 {t.sunrise}: {weather.daily.sunrise[0].slice(11, 16)}
+        </span>
+        <span>
+          🌇 {t.sunset}: {weather.daily.sunset[0].slice(11, 16)}
+        </span>
       </div>
 
       {aq && (
         <div className="air-quality">
-          <h3>Air Quality</h3>
+          <h3>{t.airQuality}</h3>
 
           <div className="aqi-status">
             <strong

@@ -23,7 +23,7 @@ function getWeatherClassByCode(code) {
   return "";
 }
 
-function Home({ isDarkMode, toggleTheme, updateWeatherMood }) {
+function Home({ isDarkMode, toggleTheme, updateWeatherMood, t, language }) {
   useEffect(() => {
     async function fetchCities() {
       try {
@@ -171,19 +171,19 @@ function Home({ isDarkMode, toggleTheme, updateWeatherMood }) {
   return (
     <div className="home-page">
       <section className="container">
-        <h1>Iran Weather Dashboard</h1>
-        <p className="subtitle">Live weather forecast for Iranian cities</p>
+        <h1>{t.dashboardTitle}</h1>
+        <p className="subtitle">{t.dashboardSubtitle}</p>
         <div className="button-group">
           <button className="theme-toggle" onClick={toggleTheme}>
-            {isDarkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
+            {isDarkMode ? t.lightMode : t.darkMode}
           </button>
 
           <button className="location-button" onClick={handleUseMyLocation}>
-            📍 Use My Location
+            {t.useMyLocation}
           </button>
 
           <button className="unit-toggle" onClick={toggleUnit}>
-            {unit === "celsius" ? "°F Fahrenheit" : "°C Celsius"}
+            {unit === "celsius" ? t.fahrenheit : t.celsius}
           </button>
         </div>
 
@@ -191,12 +191,12 @@ function Home({ isDarkMode, toggleTheme, updateWeatherMood }) {
           cities={cities}
           selectedCity={selectedCity}
           onCityChange={handleCityChange}
+          t={t}
         />
 
         {recentCities.length > 0 && (
           <div className="recent-cities">
-            <h3>Recent Cities</h3>
-
+            <h3>{t.recentCities}</h3>
             <div className="recent-list">
               {recentCities.map((city) => (
                 <button
@@ -227,13 +227,24 @@ function Home({ isDarkMode, toggleTheme, updateWeatherMood }) {
                 weather={weather}
                 airQuality={airQuality}
                 unit={unit}
+                t={t}
               />
 
-              <ForecastList weather={weather} unit={unit} />
+              <ForecastList
+                weather={weather}
+                unit={unit}
+                t={t}
+                language={language}
+              />
             </div>
 
             <div className="dashboard-side">
-              <WeatherCharts weather={weather} unit={unit} />
+              <WeatherCharts
+                weather={weather}
+                unit={unit}
+                t={t}
+                language={language}
+              />
             </div>
           </div>
         )}

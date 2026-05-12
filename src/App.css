@@ -70,7 +70,7 @@ body {
 
 .navbar {
   width: 100%;
-  max-width: 900px;
+  max-width: 1200px;
   margin-bottom: 32px;
 
   display: flex;
@@ -114,7 +114,7 @@ body {
 
 .container {
   width: 100%;
-  max-width: 900px;
+  max-width: 1200px;
 }
 
 /* TYPOGRAPHY */
@@ -713,10 +713,16 @@ h1 {
 /* DASHBOARD GRID */
 
 .dashboard-grid {
+  width: 100%;
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.8fr);
   gap: 24px;
   align-items: start;
+}
+
+.dashboard-main,
+.dashboard-side {
+  min-width: 0;
 }
 
 .dashboard-side {
@@ -728,17 +734,35 @@ h1 {
   margin-top: 0;
 }
 
-.dashboard-main {
-  min-width: 0;
+.app[dir="rtl"] .dashboard-grid {
+  direction: rtl;
 }
 
-.dashboard-side {
-  min-width: 0;
+.app[dir="rtl"] .dashboard-main,
+.app[dir="rtl"] .dashboard-side {
+  direction: rtl;
+}
+
+/* language */
+
+.language-toggle {
+  border: none;
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 6px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.app.dark .language-toggle {
+  background: #1e3a8a;
+  color: #dbeafe;
 }
 
 /* RESPONSIVE */
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .dashboard-grid {
     grid-template-columns: 1fr;
   }

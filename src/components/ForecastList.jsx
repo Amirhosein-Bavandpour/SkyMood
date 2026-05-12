@@ -8,13 +8,13 @@ function convertTemp(temp, unit) {
   return Math.round(temp);
 }
 
-function ForecastList({ weather, unit }) {
+function ForecastList({ weather, unit, t, language }) {
   const daily = weather.daily;
   const unitSymbol = unit === "fahrenheit" ? "°F" : "°C";
 
   return (
     <div className="forecast">
-      <h3>7-Day Forecast</h3>
+      <h3>{t.forecast}</h3>
 
       <div className="forecast-list">
         {daily.time.map((day, index) => {
@@ -23,16 +23,20 @@ function ForecastList({ weather, unit }) {
           return (
             <div className="forecast-item" key={day}>
               <p>
-                {new Date(day).toLocaleDateString("en-US", {
-                  weekday: "short",
-                })}
+                {new Date(day).toLocaleDateString(
+                  language === "fa" ? "fa-IR" : "en-US",
+                  {
+                    weekday: "short",
+                  },
+                )}
               </p>
 
               <div className="forecast-icon">{info.icon}</div>
 
               <p>
                 {convertTemp(daily.temperature_2m_max[index], unit)}
-                {unitSymbol} / {convertTemp(daily.temperature_2m_min[index], unit)}
+                {unitSymbol} /{" "}
+                {convertTemp(daily.temperature_2m_min[index], unit)}
                 {unitSymbol}
               </p>
             </div>
