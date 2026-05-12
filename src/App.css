@@ -114,7 +114,7 @@ body {
 
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1700px;
 }
 
 /* TYPOGRAPHY */
@@ -514,35 +514,38 @@ h1 {
 /* COMPARISON */
 
 .comparison {
-  margin-top: 28px;
-  background: white;
-  border-radius: 24px;
-  padding: 24px;
-  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.82);
+  border-radius: 28px;
+  padding: 28px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+  backdrop-filter: blur(12px);
 }
 
-.app.dark .comparison {
-  background: rgba(15, 23, 42, 0.9);
-  color: #e5e7eb;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-}
-
-.comparison h3 {
-  margin-top: 0;
+.comparison > h3 {
+  margin: 0 0 20px;
+  text-align: center;
+  font-size: 24px;
 }
 
 .comparison-controls {
   display: grid;
   grid-template-columns: 1fr 1fr auto;
   gap: 12px;
+  margin-bottom: 26px;
 }
 
 .comparison-controls select,
 .comparison-controls button {
+  min-height: 46px;
   padding: 12px 14px;
-  border-radius: 14px;
-  border: 1px solid #cbd5e1;
+  border-radius: 16px;
   font-size: 15px;
+}
+
+.comparison-controls select {
+  border: 1px solid #cbd5e1;
+  background: white;
+  color: #0f172a;
 }
 
 .comparison-controls button {
@@ -550,7 +553,105 @@ h1 {
   background: #0f172a;
   color: white;
   cursor: pointer;
+  font-weight: 800;
+}
+
+.compare-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(700px, 1fr));
+  gap: 32px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+}
+
+.compare-detail-card {
+  background: #f8fafc;
+  border-radius: 26px;
+  padding: 28px;
+  text-align: center;
+  box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.18);
+}
+
+.compare-city-header {
+  text-align: center;
+}
+
+.compare-city-header h3 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.compare-city-header h2 {
+  font-size: 52px;
+  margin: 8px 0;
+}
+
+.compare-data-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.compare-data-grid span {
+  background: white;
+  padding: 11px 12px;
+  border-radius: 16px;
   font-weight: 700;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.compare-forecast,
+.compare-charts {
+  margin-top: 22px;
+}
+
+.compare-forecast .forecast,
+.compare-charts .charts {
+  margin: 0;
+  padding: 18px;
+  border-radius: 22px;
+  box-shadow: none;
+  background: white;
+}
+
+.compare-forecast .forecast h3,
+.compare-charts .charts h3 {
+  text-align: start;
+  font-size: 18px;
+  margin-bottom: 14px;
+}
+
+.compare-forecast .forecast-list {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.compare-forecast .forecast-item {
+  padding: 12px 8px;
+  border-radius: 14px;
+}
+
+.compare-charts .chart-card {
+  padding: 14px;
+  border-radius: 16px;
+}
+
+.compare-charts .chart-card h4 {
+  font-size: 14px;
+}
+
+.compare-charts .recharts-responsive-container {
+  min-height: 220px;
+}
+
+/* DARK COMPARE */
+
+.app.dark .comparison {
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
 }
 
 .app.dark .comparison-controls select {
@@ -564,27 +665,35 @@ h1 {
   color: #0f172a;
 }
 
-.comparison-result {
-  margin-top: 20px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-
-.comparison-result > div {
-  background: #f8fafc;
-  border-radius: 18px;
-  padding: 18px;
-  text-align: center;
-}
-
-.app.dark .comparison-result > div {
+.app.dark .compare-detail-card {
   background: #1e293b;
 }
 
-.compare-icon {
-  font-size: 36px;
-  margin: 8px 0;
+.app.dark .compare-data-grid span,
+.app.dark .compare-forecast .forecast,
+.app.dark .compare-charts .charts {
+  background: #0f172a;
+}
+
+.app.dark .compare-forecast .forecast-item,
+.app.dark .compare-charts .chart-card {
+  background: #1e293b;
+}
+
+/* RTL COMPARE */
+
+.app[dir="rtl"] .compare-detail-card,
+.app[dir="rtl"] .compare-city-header,
+.app[dir="rtl"] .compare-data-grid,
+.app[dir="rtl"] .compare-forecast,
+.app[dir="rtl"] .compare-charts {
+  direction: rtl;
+  text-align: center;
+}
+
+.app[dir="rtl"] .compare-charts .recharts-wrapper,
+.app[dir="rtl"] .compare-charts .recharts-responsive-container {
+  direction: ltr;
 }
 
 /* ABOUT PAGE */
@@ -762,6 +871,13 @@ h1 {
 
 /* RESPONSIVE */
 
+@media (max-width: 1200px) {
+  .compare-detail-grid {
+    grid-template-columns: 1fr;
+    overflow-x: visible;
+  }
+}
+
 @media (max-width: 900px) {
   .dashboard-grid {
     grid-template-columns: 1fr;
@@ -772,6 +888,8 @@ h1 {
   }
 
   .navbar {
+    width: 100%;
+    max-width: 1700px;
     flex-direction: column;
     gap: 16px;
   }
@@ -781,7 +899,11 @@ h1 {
     align-items: stretch;
   }
 
-  .forecast-list {
+  .compare-data-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .compare-forecast .forecast-list {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -800,4 +922,49 @@ h1 {
   .comparison-result {
     grid-template-columns: 1fr;
   }
+
+  .compare-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* RTL NORMALIZATION */
+
+.app[dir="rtl"] .compare-detail-card,
+.app[dir="rtl"] .forecast,
+.app[dir="rtl"] .charts,
+.app[dir="rtl"] .chart-card,
+.app[dir="rtl"] .weather-card,
+.app[dir="rtl"] .comparison {
+  direction: rtl;
+  text-align: right;
+}
+
+.app[dir="rtl"] .compare-detail-card h2,
+.app[dir="rtl"] .compare-detail-card h3,
+.app[dir="rtl"] .forecast h3,
+.app[dir="rtl"] .charts h3,
+.app[dir="rtl"] .chart-card h4 {
+  text-align: center;
+}
+
+.app[dir="rtl"] .compare-details-grid span,
+.app[dir="rtl"] .weather-details span,
+.app[dir="rtl"] .sun-times span {
+  justify-content: center;
+  text-align: center;
+}
+
+.app[dir="rtl"] .forecast-item {
+  text-align: center;
+}
+
+.app[dir="rtl"] .comparison-controls select,
+.app[dir="rtl"] .comparison-controls button {
+  direction: rtl;
+}
+
+.app[dir="rtl"] .recharts-wrapper,
+.app[dir="rtl"] .recharts-responsive-container {
+  direction: ltr;
 }
