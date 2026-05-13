@@ -40,8 +40,12 @@ function CityComparison({ cities = [], unit = "celsius", t, language }) {
         await Promise.all([
           getWeatherByCity(firstCity),
           getWeatherByCity(secondCity),
-          getAirQualityByCoords(firstCity.lat, firstCity.lon),
-          getAirQualityByCoords(secondCity.lat, secondCity.lon),
+          getAirQualityByCoords(firstCity.lat, firstCity.lon, firstCity.name),
+          getAirQualityByCoords(
+            secondCity.lat,
+            secondCity.lon,
+            secondCity.name,
+          ),
         ]);
 
       setComparison({

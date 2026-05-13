@@ -134,7 +134,7 @@ function Home({ isDarkMode, toggleTheme, updateWeatherMood, t, language }) {
 
       const [weatherData, airQualityData] = await Promise.all([
         getWeatherByCity(city),
-        getAirQualityByCoords(city.lat, city.lon),
+        getAirQualityByCoords(city.lat, city.lon, city.name),
       ]);
 
       setWeather(weatherData);
