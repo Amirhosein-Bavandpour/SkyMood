@@ -53,8 +53,36 @@ function Home({ isDarkMode, toggleTheme, updateWeatherMood, t, language }) {
   const [locationName, setLocationName] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
+  const [favoriteCities, setFavoriteCities] = useState([]);
   const [unit, setUnit] = useState("celsius");
+
+  function isFavorite(city) {
+    return favoriteCities.some((item) => item.name === city?.name);
+  }
+
+  function toggleFavorite(city) {
+    if (!city) return;
+
+    let updatedFavorites;
+
+    if (isFavorite(city)) {
+      updatedFavorites = favoriteCities.filter(
+        (item) => item.name !== city.name,
+      );
+    } else {
+      updatedFavorites = [city, ...favoriteCities].slice(0, 8);
+    }
+
+    setFavoriteCities(updatedFavorites);
+    localStorage.setItem("favoriteCities", JSON.stringify(updatedFavorites));
+  }
+
+  useEffect(() => {
+    const savedFavorites =
+      JSON.parse(localStorage.getItem("favoriteCities")) || [];
+
+    setFavoriteCities(savedFavorites);
+  }, []);
 
   function updateRecentCities(city) {
     const updatedCities = [
@@ -208,6 +236,15 @@ function Home({ isDarkMode, toggleTheme, updateWeatherMood, t, language }) {
           >
             {unit === "celsius" ? t.fahrenheit : t.celsius}
           </motion.button>
+
+          <motion.button
+            className="favorite-toggle"
+            onClick={() => toggleFavorite(selectedCity)}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {isFavorite(selectedCity) ? t.savedCity : t.saveCity}
+          </motion.button>
         </div>
 
         <CitySelector
@@ -234,6 +271,34 @@ function Home({ isDarkMode, toggleTheme, updateWeatherMood, t, language }) {
           </div>
         )}
 
+        {favoriteCities.length > 0 && (
+          <div className="favorite-cities">
+            <h3>{t.favoriteCities}</h3>
+
+            <div className="favorite-list">
+              {favoriteCities.map((city) => (
+                <div className="favorite-chip" key={city.name}>
+                  <button
+                    type="button"
+                    className="favorite-city-button"
+                    onClick={() => handleCityChange(city)}
+                  >
+                    ⭐ {city.name}
+                  </button>
+
+                  <button
+                    type="button"
+                    className="remove-favorite"
+                    onClick={() => toggleFavorite(city)}
+                    aria-label={`${t.removeFavorite} ${city.name}`}
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         {error && <p className="error">{error}</p>}
 
         {loading && <SkeletonWeather />}

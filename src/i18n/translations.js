@@ -21,6 +21,11 @@ export const translations = {
     fahrenheit: "°F Fahrenheit",
     celsius: "°C Celsius",
 
+    favoriteCities: "Favorite Cities",
+    saveCity: "☆ Save City",
+    savedCity: "⭐ Saved",
+    removeFavorite: "Remove from favorites",
+
     forecast: "7-Day Forecast",
     weatherAnalytics: "Weather Analytics",
     next24Hours: "Next 24 Hours Temperature",
@@ -61,6 +66,11 @@ export const translations = {
     useMyLocation: "📍 موقعیت من",
     lightMode: "☀️ حالت روشن",
     darkMode: "🌙 حالت تاریک",
+
+    favoriteCities: "شهرهای مورد علاقه",
+    saveCity: "☆ ذخیره شهر",
+    savedCity: "⭐ ذخیره شده",
+    removeFavorite: "حذف از علاقه‌مندی‌ها",
 
     fahrenheit: "فارنهایت °F",
     celsius: "سلسیوس °C",
