@@ -4,6 +4,10 @@ A modern React weather dashboard focused on Iranian cities with live forecasts, 
 
 ---
 
+## 🌍 Live Demo
+
+https://amitime-ir-weather.netlify.app/
+
 ## ✨ Features
 
 - 🌤️ Live weather forecast for Iranian cities
