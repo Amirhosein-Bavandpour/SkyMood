@@ -21,7 +21,7 @@ function ForecastList({ weather, unit, t, language }) {
       initial="hidden"
       animate="visible"
     >
-      <h3>{t.forecast}</h3>
+      <h2>{t.forecast}</h2>
 
       <div className="forecast-list">
         {daily.time.map((day, index) => {

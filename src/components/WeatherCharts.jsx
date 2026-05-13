@@ -41,7 +41,7 @@ function WeatherCharts({ weather, unit, t, language }) {
 
   return (
     <section className="charts">
-      <h3>{t.weatherAnalytics}</h3>
+      <h2>{t.weatherAnalytics}</h2>
 
       <motion.div
         className="chart-card"

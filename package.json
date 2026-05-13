@@ -22,13 +22,15 @@
     "vie": "^2.1.0"
   },
   "devDependencies": {
+    "@babel/types": "^7.29.0",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
-    "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
-    "vite": "^8.0.12"
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest",
+    "vite-plugin-pwa": "latest"
   }
 }

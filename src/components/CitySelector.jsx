@@ -2,7 +2,13 @@ import { useState } from "react";
 import { normalizeText } from "../utils/textNormalize";
 import { motion } from "framer-motion";
 
-function CitySelector({ cities = [], selectedCity, onCityChange, t }) {
+function CitySelector({
+  cities = [],
+  selectedCity,
+  onCityChange,
+  t,
+  language,
+}) {
   const [search, setSearch] = useState("");
 
   const filteredCities = cities.filter((city) => {
@@ -35,6 +41,7 @@ function CitySelector({ cities = [], selectedCity, onCityChange, t }) {
       />
 
       <select
+        aria-label={language === "fa" ? "انتخاب شهر " : "Select city"}
         value={selectedCity?.name || ""}
         onChange={(e) => {
           const city = cities.find((item) => item.name === e.target.value);

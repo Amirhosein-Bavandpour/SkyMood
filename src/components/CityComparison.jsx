@@ -80,7 +80,7 @@ function CityComparison({ cities = [], unit = "celsius", t, language }) {
         animate={{ opacity: 1, y: 0 }}
       >
         <div className="compare-city-header">
-          <h3>{data.city.name}</h3>
+          <h2>{data.city.name}</h2>
           <p className="city-fa">{data.city.faName}</p>
 
           <div className="weather-icon">{weatherInfo.icon}</div>
@@ -154,10 +154,13 @@ function CityComparison({ cities = [], unit = "celsius", t, language }) {
 
   return (
     <section className="comparison">
-      <h3>{t.compareTitle}</h3>
+      <h2>{t.compareTitle}</h2>
 
       <div className="comparison-controls">
         <select
+          aria-label={
+            language === "fa" ? "انتخاب شهر اول" : "Select first city"
+          }
           value={firstCity.name}
           onChange={(e) => {
             const city = cities.find((city) => city.name === e.target.value);
@@ -172,6 +175,9 @@ function CityComparison({ cities = [], unit = "celsius", t, language }) {
         </select>
 
         <select
+          aria-label={
+            language === "fa" ? "انتخاب شهر دوم" : "Select second city"
+          }
           value={secondCity.name}
           onChange={(e) => {
             const city = cities.find((city) => city.name === e.target.value);

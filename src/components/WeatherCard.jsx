@@ -66,7 +66,7 @@ function WeatherCard({ city, weather, airQuality, unit, t }) {
 
       {aq && (
         <div className="air-quality">
-          <h3>{t.airQuality}</h3>
+          <h2>{t.airQuality}</h2>
 
           <div className="aqi-status">
             <strong

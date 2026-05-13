@@ -252,11 +252,12 @@ function Home({ isDarkMode, toggleTheme, updateWeatherMood, t, language }) {
           selectedCity={selectedCity}
           onCityChange={handleCityChange}
           t={t}
+          language={language}
         />
 
         {recentCities.length > 0 && (
           <div className="recent-cities">
-            <h3>{t.recentCities}</h3>
+            <h2>{t.recentCities}</h2>
             <div className="recent-list">
               {recentCities.map((city) => (
                 <button
@@ -273,7 +274,7 @@ function Home({ isDarkMode, toggleTheme, updateWeatherMood, t, language }) {
 
         {favoriteCities.length > 0 && (
           <div className="favorite-cities">
-            <h3>{t.favoriteCities}</h3>
+            <h2>{t.favoriteCities}</h2>
 
             <div className="favorite-list">
               {favoriteCities.map((city) => (
