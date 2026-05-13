@@ -1,31 +1,49 @@
-import { motion } from "framer-motion";
-import { cardAnimation } from "../utils/animations";
+import { useEffect, useRef, useState } from "react";
 import {
   LineChart,
   Line,
   XAxis,
   YAxis,
   Tooltip,
-  ResponsiveContainer,
   CartesianGrid,
   Legend,
 } from "recharts";
+
+function ChartBox({ children }) {
+  const ref = useRef(null);
+  const [width, setWidth] = useState(320);
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const observer = new ResizeObserver(([entry]) => {
+      setWidth(entry.contentRect.width);
+    });
+
+    observer.observe(ref.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div className="chart-responsive-wrapper" ref={ref}>
+      {children(Math.max(width, 280))}
+    </div>
+  );
+}
 
 function WeatherCharts({ weather, unit, t, language }) {
   const unitSymbol = unit === "fahrenheit" ? "°F" : "°C";
 
   function convertTemp(temp) {
-    if (unit === "fahrenheit") {
-      return Math.round((temp * 9) / 5 + 32);
-    }
-
-    return Math.round(temp);
+    return unit === "fahrenheit"
+      ? Math.round((temp * 9) / 5 + 32)
+      : Math.round(temp);
   }
 
   const hourlyData = weather.hourly.time.slice(0, 24).map((time, index) => ({
     time: time.slice(11, 16),
     temperature: convertTemp(weather.hourly.temperature_2m[index]),
-    humidity: weather.hourly.relative_humidity_2m[index],
   }));
 
   const dailyData = weather.daily.time.map((day, index) => ({
@@ -41,63 +59,70 @@ function WeatherCharts({ weather, unit, t, language }) {
 
   return (
     <section className="charts">
-      <h2>{t.weatherAnalytics}</h2>
+      <h3>{t.weatherAnalytics}</h3>
 
-      <motion.div
-        className="chart-card"
-        variants={cardAnimation}
-        initial="hidden"
-        animate="visible"
-      >
+      <div className="chart-card">
         <h4>{t.next24Hours}</h4>
 
-        <ResponsiveContainer width="100%" height={280}>
-          <LineChart data={hourlyData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="time" />
-            <YAxis unit={unitSymbol} />
-            <Tooltip />
-            <Line
-              type="monotone"
-              dataKey="temperature"
-              strokeWidth={3}
-              dot={false}
-              name="Temperature"
-            />
-          </LineChart>
-        </ResponsiveContainer>
-      </motion.div>
+        <ChartBox>
+          {(width) => (
+            <LineChart
+              width={width}
+              height={260}
+              data={hourlyData}
+              margin={{ top: 10, right: 8, left: -24, bottom: 0 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="time" tick={{ fontSize: 11 }} />
+              <YAxis unit={unitSymbol} tick={{ fontSize: 11 }} />
+              <Tooltip />
+              <Line
+                type="monotone"
+                dataKey="temperature"
+                strokeWidth={3}
+                dot={false}
+                name="Temperature"
+                isAnimationActive={false}
+              />
+            </LineChart>
+          )}
+        </ChartBox>
+      </div>
 
-      <motion.div
-        className="chart-card"
-        variants={cardAnimation}
-        initial="hidden"
-        animate="visible"
-      >
+      <div className="chart-card">
         <h4>{t.sevenDayMaxMin}</h4>
 
-        <ResponsiveContainer width="100%" height={280}>
-          <LineChart data={dailyData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="day" />
-            <YAxis unit={unitSymbol} />
-            <Tooltip />
-            <Legend />
-            <Line
-              type="monotone"
-              dataKey="max"
-              strokeWidth={3}
-              name="Max Temp"
-            />
-            <Line
-              type="monotone"
-              dataKey="min"
-              strokeWidth={3}
-              name="Min Temp"
-            />
-          </LineChart>
-        </ResponsiveContainer>
-      </motion.div>
+        <ChartBox>
+          {(width) => (
+            <LineChart
+              width={width}
+              height={260}
+              data={dailyData}
+              margin={{ top: 10, right: 8, left: -24, bottom: 0 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="day" tick={{ fontSize: 11 }} />
+              <YAxis unit={unitSymbol} tick={{ fontSize: 11 }} />
+              <Tooltip />
+              <Legend />
+              <Line
+                type="monotone"
+                dataKey="max"
+                strokeWidth={3}
+                name="Max Temp"
+                isAnimationActive={false}
+              />
+              <Line
+                type="monotone"
+                dataKey="min"
+                strokeWidth={3}
+                name="Min Temp"
+                isAnimationActive={false}
+              />
+            </LineChart>
+          )}
+        </ChartBox>
+      </div>
     </section>
   );
 }
