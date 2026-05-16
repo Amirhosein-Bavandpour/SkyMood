@@ -8,6 +8,8 @@ import Compare from "./pages/Compare";
 import About from "./pages/About";
 import { AnimatePresence } from "framer-motion";
 import WeatherBackground from "./components/WeatherBackground";
+import { Capacitor } from "@capacitor/core";
+import { StatusBar, Style } from "@capacitor/status-bar";
 
 function App() {
   const location = useLocation();
