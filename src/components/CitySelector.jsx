@@ -54,7 +54,7 @@ function CitySelector({
       >
         {filteredCities.map((city) => (
           <option key={city.name} value={city.name}>
-            {city.name} - {city.faName}
+            {language === "fa" ? city.faName || city.name : city.name}
           </option>
         ))}
       </select>

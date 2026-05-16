@@ -380,6 +380,7 @@ h1 {
 /* BUTTONS */
 
 .button-group {
+  background: none;
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -400,51 +401,47 @@ h1 {
 }
 
 .theme-toggle {
-  background: #0f172a;
-  color: white;
+  background: none;
   padding: 10px 16px;
   border-radius: 999px;
 }
 
 .app.dark .theme-toggle {
-  background: #e5e7eb;
-  color: #0f172a;
+  background: none;
 }
 
 .location-button {
-  background: #16a34a;
-  color: white;
+  background: none;
   padding: 10px 16px;
   border-radius: 999px;
 }
 
 .location-button:hover {
-  background: #15803d;
+  background: none;
 }
 
 .app.dark .location-button {
-  background: #22c55e;
-  color: #052e16;
+  background: none;
 }
 
 .app.dark .location-button:hover {
-  background: #16a34a;
+  background: none;
 }
 
 .unit-toggle {
-  background: #7c3aed;
-  color: white;
+  background: none;
+  color: rgb(0, 0, 0);
   padding: 10px 16px;
   border-radius: 999px;
 }
 
 .unit-toggle:hover {
-  background: #6d28d9;
+  background: none;
 }
 
 .app.dark .unit-toggle {
-  background: #a78bfa;
-  color: #2e1065;
+  background: none;
+  color: rgb(197, 197, 197);
 }
 
 .search-button {
@@ -1052,10 +1049,10 @@ h1 {
   border: none;
   background: #e0f2fe;
   color: #0369a1;
-  padding: 6px 10px;
+  padding: 5px 10px;
   border-radius: 999px;
   cursor: pointer;
-  font-weight: 800;
+  font-weight: 500;
 }
 
 .app.dark .language-toggle {
@@ -1066,8 +1063,8 @@ h1 {
 /* favorite */
 
 .favorite-toggle {
-  background: #f59e0b;
-  color: white;
+  background: none;
+  color: rgb(0, 0, 0);
   padding: 10px 16px;
   border-radius: 999px;
   border: none;
@@ -1075,7 +1072,7 @@ h1 {
 }
 
 .favorite-toggle:hover {
-  background: #d97706;
+  background: none;
 }
 
 .favorite-cities {
@@ -1116,8 +1113,8 @@ h1 {
 }
 
 .app.dark .favorite-toggle {
-  background: #fbbf24;
-  color: #451a03;
+  background: none;
+  color: rgb(197, 197, 197);
 }
 
 .app.dark .favorite-list button {
@@ -1441,4 +1438,32 @@ h1 {
   .recharts-surface {
     width: 100% !important;
   }
+}
+
+/* RTL CENTER ALIGN FIX */
+
+.app[dir="rtl"] .weather-card,
+.app[dir="rtl"] .weather-card h1,
+.app[dir="rtl"] .weather-card h2,
+.app[dir="rtl"] .city-fa,
+.app[dir="rtl"] .forecast,
+.app[dir="rtl"] .forecast h3,
+.app[dir="rtl"] .forecast-item,
+.app[dir="rtl"] .air-quality,
+.app[dir="rtl"] .air-quality h3,
+.app[dir="rtl"] .aqi-status,
+.app[dir="rtl"] .charts,
+.app[dir="rtl"] .charts h3 {
+  text-align: center;
+}
+
+.app[dir="rtl"] .air-quality-grid span,
+.app[dir="rtl"] .weather-details span,
+.app[dir="rtl"] .sun-times span {
+  justify-content: center;
+  text-align: center;
+}
+
+.app[dir="rtl"] .forecast-list {
+  direction: rtl;
 }

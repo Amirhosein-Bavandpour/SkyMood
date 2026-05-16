@@ -17,7 +17,7 @@ export async function loadIranCities() {
               .split(" ")
               .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
               .join(" "),
-            faName: city.city,
+            faName: city.city_fa,
             lat: Number(city.lat),
             lon: Number(city.lng),
             province: city.admin_name,

@@ -1,11 +1,11 @@
 export const translations = {
   en: {
-    appName: "Iran Weather",
+    appName: "IR-SkyMood",
     home: "Home",
     compare: "Compare",
     about: "About",
 
-    dashboardTitle: "Iran Weather Dashboard",
+    dashboardTitle: "SkyMood",
     dashboardSubtitle: "Live weather forecast for Iranian cities",
 
     searchCity: "Search Iran City",
@@ -14,16 +14,16 @@ export const translations = {
     noCityFound: "No city found",
 
     recentCities: "Recent Cities",
-    useMyLocation: "📍 Use My Location",
-    lightMode: "☀️ Light Mode",
-    darkMode: "🌙 Dark Mode",
+    useMyLocation: "📍",
+    lightMode: "☀️",
+    darkMode: "🌙",
 
-    fahrenheit: "°F Fahrenheit",
-    celsius: "°C Celsius",
+    fahrenheit: "°F",
+    celsius: "°C",
 
     favoriteCities: "Favorite Cities",
-    saveCity: "☆ Save City",
-    savedCity: "⭐ Saved",
+    saveCity: "☆",
+    savedCity: "⭐",
     removeFavorite: "Remove from favorites",
 
     forecast: "7-Day Forecast",
@@ -36,44 +36,44 @@ export const translations = {
     sunrise: "Sunrise",
     sunset: "Sunset",
 
-    compareTitle: "Compare Iranian Cities",
+    compareTitle: "Compare Weather of Iranian Cities",
     compareSubtitle: "Compare current weather between two cities",
     compareButton: "Compare",
     comparing: "Comparing...",
 
     aboutTitle: "About This App",
     aboutTextOne:
-      "Iran Weather Dashboard is a React weather application focused on Iranian cities. It uses Open-Meteo APIs to show live weather, forecast, air quality, UV index, city comparison, and location-based weather.",
+      "SkyMood is a modern Progressive Web App (PWA) and Android-ready weather platform focused on Iranian cities. The application provides real-time weather data, 7-day forecasts, air quality monitoring, UV index tracking, weather analytics charts, animated weather backgrounds, city comparison tools, and geolocation-based forecasts. The project supports bilingual experience (English & Persian), dark/light themes, favorite cities, responsive mobile design, offline-ready PWA functionality, and Android APK deployment using Capacitor.",
     aboutTextTwo:
-      "Built with React, Vite, Axios, localStorage, responsive CSS, Recharts, and component-based architecture.",
+      "Built with React, Vite, Axios, Recharts, Framer Motion, Capacitor, localStorage, responsive CSS, and component-based architecture, powered by Open-Meteo APIs.",
   },
 
   fa: {
-    appName: "آب‌وهوای ایران",
+    appName: "IR-SkyMood",
     home: "خانه",
     compare: "مقایسه",
     about: "درباره",
 
-    dashboardTitle: "داشبورد آب‌وهوای ایران",
+    dashboardTitle: "SkyMood",
     dashboardSubtitle: "پیش‌بینی زنده آب‌وهوا برای شهرهای ایران",
 
     searchCity: "جستجوی شهر ایران",
-    searchPlaceholder: "مثلا Tehran, Shiraz, Mashhad...",
-    searchWeather: "نمایش آب‌وهوا",
+    searchPlaceholder: "مثلا تهران, شیراز, مشهد...",
+    searchWeather: "نمایش آب‌ وهوا",
     noCityFound: "شهری پیدا نشد",
 
     recentCities: "شهرهای اخیر",
-    useMyLocation: "📍 موقعیت من",
-    lightMode: "☀️ حالت روشن",
-    darkMode: "🌙 حالت تاریک",
+    useMyLocation: "📍",
+    lightMode: "☀️",
+    darkMode: "🌙",
 
     favoriteCities: "شهرهای مورد علاقه",
-    saveCity: "☆ ذخیره شهر",
-    savedCity: "⭐ ذخیره شده",
+    saveCity: "☆",
+    savedCity: "⭐",
     removeFavorite: "حذف از علاقه‌مندی‌ها",
 
-    fahrenheit: "فارنهایت °F",
-    celsius: "سلسیوس °C",
+    fahrenheit: "°F",
+    celsius: "°C",
 
     forecast: "پیش‌بینی ۷ روزه",
     weatherAnalytics: "تحلیل آب‌وهوا",
@@ -85,15 +85,15 @@ export const translations = {
     sunrise: "طلوع",
     sunset: "غروب",
 
-    compareTitle: "مقایسه شهرهای ایران",
+    compareTitle: "مقایسه آب و هوای شهرهای ایران",
     compareSubtitle: "مقایسه آب‌وهوای فعلی بین دو شهر",
     compareButton: "مقایسه",
     comparing: "در حال مقایسه...",
 
     aboutTitle: "درباره این برنامه",
     aboutTextOne:
-      "داشبورد آب‌وهوای ایران یک اپلیکیشن React برای نمایش آب‌وهوای شهرهای ایران است. این برنامه از APIهای Open-Meteo برای نمایش آب‌وهوای زنده، پیش‌بینی، کیفیت هوا، شاخص UV، مقایسه شهرها و آب‌وهوا بر اساس موقعیت استفاده می‌کند.",
+      "اسکای موود یک اپلیکیشن مدرن هواشناسی به صورت PWA و قابل اجرا روی اندروید است که بر شهرهای ایران تمرکز دارد. این برنامه اطلاعات آب‌وهوای لحظه‌ای، پیش‌بینی ۷ روزه، کیفیت هوا، شاخص UV، نمودارهای تحلیلی هواشناسی، پس‌زمینه‌های متحرک متناسب با وضعیت آب‌وهوا، مقایسه شهرها و آب‌وهوای مبتنی بر موقعیت مکانی کاربر را ارائه می‌دهد.این پروژه از دو زبان فارسی و انگلیسی، حالت روشن و تاریک، شهرهای موردعلاقه، طراحی واکنش‌گرا برای موبایل، قابلیت آفلاین به کمک PWA و ساخت نسخه اندروید با Capacitor پشتیبانی می‌کند.",
     aboutTextTwo:
-      "ساخته‌شده با React، Vite، Axios، localStorage، CSS واکنش‌گرا، Recharts و معماری کامپوننت‌محور.",
+      "این برنامه با استفاده از React، Vite، Axios، Recharts، Framer Motion، Capacitor، localStorage، طراحی Responsive و معماری Component-Based توسعه داده شده و داده‌های آن توسط APIهای Open-Meteo تأمین می‌شود.",
   },
 };

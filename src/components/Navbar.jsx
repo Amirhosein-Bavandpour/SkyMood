@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 function Navbar({ t, language, toggleLanguage }) {
   return (
     <nav className="navbar">
-      <h2>{t.appName}</h2>
 
       <div>
         <NavLink to="/">{t.home}</NavLink>

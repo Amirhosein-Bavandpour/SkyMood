@@ -169,7 +169,7 @@ function CityComparison({ cities = [], unit = "celsius", t, language }) {
         >
           {cities.map((city) => (
             <option key={`${city.name}-${city.lat}`} value={city.name}>
-              {city.name}
+              {language === "fa" ? city.faName || city.name : city.name}
             </option>
           ))}
         </select>
@@ -186,7 +186,7 @@ function CityComparison({ cities = [], unit = "celsius", t, language }) {
         >
           {cities.map((city) => (
             <option key={`${city.name}-${city.lon}`} value={city.name}>
-              {city.name}
+              {language === "fa" ? city.faName || city.name : city.name}
             </option>
           ))}
         </select>

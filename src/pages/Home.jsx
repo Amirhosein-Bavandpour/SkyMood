@@ -12,6 +12,8 @@ import WeatherCard from "../components/WeatherCard";
 import ForecastList from "../components/ForecastList";
 import SkeletonWeather from "../components/SkeletonWeather";
 import { pageAnimation } from "../utils/animations";
+import { Capacitor } from "@capacitor/core";
+import { Geolocation } from "@capacitor/geolocation";
 
 function getWeatherClassByCode(code) {
   if (code === 0) return "sunny";
@@ -261,11 +263,11 @@ function Home({ isDarkMode, toggleTheme, updateWeatherMood, t, language }) {
             <div className="recent-list">
               {recentCities.map((city) => (
                 <button
-                  key={city.name}
+                  key={language === "fa" ? city.faName || city.name : city.name}
                   type="button"
                   onClick={() => handleCityChange(city)}
                 >
-                  {city.name}
+                  {language === "fa" ? city.faName || city.name : city.name}
                 </button>
               ))}
             </div>
@@ -278,20 +280,26 @@ function Home({ isDarkMode, toggleTheme, updateWeatherMood, t, language }) {
 
             <div className="favorite-list">
               {favoriteCities.map((city) => (
-                <div className="favorite-chip" key={city.name}>
+                <div
+                  className="favorite-chip"
+                  key={language === "fa" ? city.faName || city.name : city.name}
+                >
                   <button
                     type="button"
                     className="favorite-city-button"
                     onClick={() => handleCityChange(city)}
                   >
-                    ⭐ {city.name}
+                    ⭐{" "}
+                    {language === "fa" ? city.faName || city.name : city.name}
                   </button>
 
                   <button
                     type="button"
                     className="remove-favorite"
                     onClick={() => toggleFavorite(city)}
-                    aria-label={`${t.removeFavorite} ${city.name}`}
+                    aria-label={`${t.removeFavorite} ${
+                      language === "fa" ? city.faName || city.name : city.name
+                    }`}
                   >
                     ×
                   </button>

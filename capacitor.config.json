@@ -1,0 +1,8 @@
+{
+  "appId": "com.amitime.SkyMood",
+  "appName": "SkyMood",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  }
+}

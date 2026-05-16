@@ -12,7 +12,7 @@ function convertTemp(temp, unit) {
   return Math.round(temp);
 }
 
-function WeatherCard({ city, weather, airQuality, unit, t }) {
+function WeatherCard({ city, weather, airQuality, unit, t ,language}) {
   const current = weather.current;
   const info = getWeatherInfo(current.weather_code);
   const unitSymbol = unit === "fahrenheit" ? "°F" : "°C";
@@ -26,7 +26,7 @@ function WeatherCard({ city, weather, airQuality, unit, t }) {
       initial="hidden"
       animate="visible"
     >
-      <h2>{city.name}</h2>
+      <h2>{language === "fa" ? city.faName || city.name : city.name}</h2>
       <p className="city-fa">{city.faName}</p>
 
       <div className="weather-icon">{info.icon}</div>
@@ -67,7 +67,7 @@ function WeatherCard({ city, weather, airQuality, unit, t }) {
       {aq && (
         <div className="air-quality">
           <h2>{t.airQuality}</h2>
-
+          <br />
           <div className="aqi-status">
             <strong
               style={{
