@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Droplets, Wind, Activity, Sun } from "lucide-react";
+import { Activity } from "lucide-react";
 import { getWeatherByCity, getAirQualityByCoords } from "../api/weatherApi";
 import { getWeatherInfo } from "../utils/weatherCodes";
 import { getAqiInfo } from "../utils/airQuality";

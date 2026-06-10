@@ -12,7 +12,7 @@ function convertTemp(temp, unit) {
   return Math.round(temp);
 }
 
-function WeatherCard({ city, weather, airQuality, unit, t ,language}) {
+function WeatherCard({ city, weather, airQuality, unit, t, language }) {
   const current = weather.current;
   const info = getWeatherInfo(current.weather_code);
   const unitSymbol = unit === "fahrenheit" ? "°F" : "°C";

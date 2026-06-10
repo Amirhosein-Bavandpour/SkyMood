@@ -8,7 +8,7 @@ export default defineConfig({
 
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["favicon.svg", "favicon.ico", "robots.txt"],
+      includeAssets: ["favicon.webp", "robots.txt"],
 
       manifest: {
         name: "Iran Weather Dashboard",
@@ -24,26 +24,26 @@ export default defineConfig({
 
         icons: [
           {
-            src: "/pwa-192x192.png",
+            src: "/pwa-192x192.webp",
             sizes: "192x192",
-            type: "image/png",
+            type: "image/webp",
           },
           {
-            src: "/pwa-512x512.png",
+            src: "/pwa-512x512.webp",
             sizes: "512x512",
-            type: "image/png",
+            type: "image/webp",
           },
           {
-            src: "/pwa-512x512.png",
+            src: "/pwa-512x512.webp",
             sizes: "512x512",
-            type: "image/png",
+            type: "image/webp",
             purpose: "any maskable",
           },
         ],
       },
 
       workbox: {
-        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
+        globPatterns: ["**/*.{js,css,html,ico,png,svg,webp}"],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/api\.open-meteo\.com\/.*/i,

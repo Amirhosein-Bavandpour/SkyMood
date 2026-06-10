@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { loadIranCities } from "./data/loadCities";
 import { motion } from "framer-motion";
 import {
@@ -12,8 +12,6 @@ import WeatherCard from "../components/WeatherCard";
 import ForecastList from "../components/ForecastList";
 import SkeletonWeather from "../components/SkeletonWeather";
 import { pageAnimation } from "../utils/animations";
-import { Capacitor } from "@capacitor/core";
-import { Geolocation } from "@capacitor/geolocation";
 
 function getWeatherClassByCode(code) {
   if (code === 0) return "sunny";
@@ -108,23 +106,7 @@ function Home({ isDarkMode, toggleTheme, updateWeatherMood, t, language }) {
     setUnit((prev) => (prev === "celsius" ? "fahrenheit" : "celsius"));
   }
 
-  function getWeatherClass() {
-    if (!weather?.current?.weather_code) return "";
-
-    const code = weather.current.weather_code;
-
-    if (code === 0) return "sunny";
-    if ([1, 2].includes(code)) return "partly-cloudy";
-    if (code === 3) return "cloudy";
-    if ([45, 48].includes(code)) return "foggy";
-    if ([51, 53, 55, 61, 63, 65, 80, 81, 82].includes(code)) return "rainy";
-    if ([71, 73, 75, 77, 85, 86].includes(code)) return "snowy";
-    if ([95, 96, 99].includes(code)) return "stormy";
-
-    return "";
-  }
-
-  async function fetchWeather(city) {
+  const fetchWeather = useCallback(async function fetchWeather(city) {
     if (!city?.lat || !city?.lon) {
       setError("Selected city is invalid.");
       return;
@@ -149,7 +131,7 @@ function Home({ isDarkMode, toggleTheme, updateWeatherMood, t, language }) {
     } finally {
       setLoading(false);
     }
-  }
+  }, [updateWeatherMood]);
 
   function handleUseMyLocation() {
     if (!navigator.geolocation) {
@@ -198,7 +180,7 @@ function Home({ isDarkMode, toggleTheme, updateWeatherMood, t, language }) {
     if (selectedCity) {
       fetchWeather(selectedCity);
     }
-  }, [selectedCity]);
+  }, [fetchWeather, selectedCity]);
 
   return (
     <motion.div
@@ -325,6 +307,7 @@ function Home({ isDarkMode, toggleTheme, updateWeatherMood, t, language }) {
                 airQuality={airQuality}
                 unit={unit}
                 t={t}
+                language={language}
               />
 
               <ForecastList

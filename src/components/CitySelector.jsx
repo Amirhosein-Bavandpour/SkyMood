@@ -12,11 +12,11 @@ function CitySelector({
   const [search, setSearch] = useState("");
 
   const filteredCities = cities.filter((city) => {
-    const query = search.toLowerCase().trim();
+    const query = normalizeText(search);
 
     return (
-      city.name?.toLowerCase().includes(query) ||
-      city.faName?.toLowerCase().includes(query)
+      normalizeText(city.name).includes(query) ||
+      normalizeText(city.faName).includes(query)
     );
   });
 
